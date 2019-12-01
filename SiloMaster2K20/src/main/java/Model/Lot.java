@@ -68,8 +68,9 @@ public class Lot {
         this.qualite = qualite;
         this.commande = commande;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return " ID : " +this.id + "\n TYPE: " + this.TypeCereale + "\n POIDS: " + this.poids + "\n QUALITE: " + this.qualite; 
+    }
 }

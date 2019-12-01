@@ -5,6 +5,11 @@
  */
 package Engine;
 
+import Controllers.CommandeController;
+import Model.Commande;
+import Model.Lot;
+import java.util.Date;
+
 /**
  *
  * @author Alex-PC
@@ -14,13 +19,21 @@ public final class GestionEvenement {
     private static volatile GestionEvenement instance = null;
     private float horloge = .0f;
     
-    /*
-    Constructeur vide
-    */
-    public GestionEvenement() {
-        
+    private ArchivageJSON archivage;
+    private CommandeController commandeCtrl;
+
+    public ArchivageJSON getArchivage() {
+        return archivage;
     }
     
+    
+    /*
+    Constructeur
+    */
+    public GestionEvenement() {
+        archivage = new ArchivageJSON();
+        commandeCtrl = new CommandeController();
+    }
     
     public final static GestionEvenement getInstance(){
         if (GestionEvenement.instance == null){
@@ -33,5 +46,43 @@ public final class GestionEvenement {
         return GestionEvenement.instance;
     }
     
+    public void creerCommande(){
+        int id = 0;
+        
+        if(this.archivage.getLstCommande().size() == 0){
+            id = 1;
+        }else{
+            id = this.archivage.getLstCommande().get(this.archivage.getLstCommande().size() - 1).getId() + 1;
+        } 
+        
+        Date arrivee = new Date(System.currentTimeMillis());
+        Date depart = null;
+        String desc = "rien";
+        
+        Commande newCommande = this.commandeCtrl.creerCommande(id, arrivee, depart, desc); 
+        newCommande.setLot(this.creerLot(newCommande));
+        
+        this.archivage.getLstCommande().add(newCommande);
+    }
     
+    private Lot creerLot(Commande c){
+        
+        int id = 0;
+        
+        if(this.archivage.getLstLot().size() == 0){
+            id = 1;
+        }else{
+            id = this.archivage.getLstLot().get(this.archivage.getLstLot().size() - 1).getId() + 1;
+        } 
+  
+        String typeCereale = "random";
+        float poids = 10.0f;
+        String qualite = "random";
+        
+        Lot newLot = new Lot(id, typeCereale, poids, qualite, c);
+        
+        this.archivage.getLstLot().add(newLot);
+        
+        return newLot;
+    }
 }

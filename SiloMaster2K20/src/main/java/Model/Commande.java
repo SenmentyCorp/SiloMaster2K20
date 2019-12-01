@@ -64,5 +64,8 @@ public class Commande {
         this.description = description;
     }
     
-    
+    @Override
+    public String toString() {
+        return " ID : " +this.id + "\n ARRIVEE: " + this.arrivee + "\n DEPART: " + this.depart + "\n DESCRIPTION: " + this.description; 
+    }
 }

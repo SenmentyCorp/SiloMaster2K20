@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Alex-PC
  */
-class ArchivageJSON {
+public class ArchivageJSON {
     
     private ArrayList<Commande> lstCommande;
     private ArrayList<Lot> lstLot;

@@ -7,18 +7,21 @@ package Controllers;
 
 import Engine.GestionEvenement;
 import Model.Commande;
+import java.util.Date;
 
 /**
  *
  * @author Alex-PC
  */
 public class CommandeController {
-    
-    private GestionEvenement gest = GestionEvenement.getInstance();
 
     /*
     Constructeur vide
     */
     public CommandeController() {
+    }
+
+    public Commande creerCommande(int id, Date arrivee, Date depart, String description){  
+        return new Commande(id, arrivee, depart, description);
     }    
 }

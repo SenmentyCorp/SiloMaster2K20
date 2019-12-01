@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Engine.GestionEvenement;
+
 
 /**
  *
@@ -12,6 +14,9 @@ package Model;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World !");
+        GestionEvenement.getInstance().creerCommande();   
+        
+        System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).toString());
+        System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).getLot().toString());
     }
 }
