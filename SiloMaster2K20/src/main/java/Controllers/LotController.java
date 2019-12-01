@@ -6,6 +6,8 @@
 package Controllers;
 
 import Engine.GestionEvenement;
+import Model.Commande;
+import Model.Lot;
 
 /**
  *
@@ -17,8 +19,12 @@ public class LotController {
     Constructeur vide
     */
 
-    public LotController() {
+    public LotController(){
         
     }
     
+    public Lot creerLot(int id, String typeCereale, float poids, String qualite, Commande c){
+        return new Lot(id, typeCereale, poids, qualite, c);
+    }
+   
 }

@@ -5,7 +5,7 @@
  */
 package Engine;
 
-import Controllers.CommandeController;
+import Controllers.*;
 import Model.Commande;
 import Model.Lot;
 import java.util.Date;
@@ -21,6 +21,7 @@ public final class GestionEvenement {
     
     private ArchivageJSON archivage;
     private CommandeController commandeCtrl;
+    private LotController lotCtrl;
 
     public ArchivageJSON getArchivage() {
         return archivage;
@@ -33,6 +34,7 @@ public final class GestionEvenement {
     public GestionEvenement() {
         archivage = new ArchivageJSON();
         commandeCtrl = new CommandeController();
+        lotCtrl = new LotController();
     }
     
     public final static GestionEvenement getInstance(){
@@ -79,7 +81,7 @@ public final class GestionEvenement {
         float poids = 10.0f;
         String qualite = "random";
         
-        Lot newLot = new Lot(id, typeCereale, poids, qualite, c);
+        Lot newLot = this.lotCtrl.creerLot(id, typeCereale, poids, qualite, c);
         
         this.archivage.getLstLot().add(newLot);
         
