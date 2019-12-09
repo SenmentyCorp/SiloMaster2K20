@@ -10,6 +10,10 @@ import Model.Commande;
 import Model.Lot;
 import java.util.Date;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+
 /**
  *
  * @author Alex-PC
