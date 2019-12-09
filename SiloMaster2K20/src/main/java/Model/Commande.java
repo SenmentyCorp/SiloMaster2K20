@@ -68,4 +68,15 @@ public class Commande {
     public String toString() {
         return " ID : " +this.id + "\n ARRIVEE: " + this.arrivee + "\n DEPART: " + this.depart + "\n DESCRIPTION: " + this.description; 
     }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o.getClass() == Commande.class){
+            Commande test = (Commande)(o);
+            
+            return test.getId()==this.id;
+        }else{
+            return false;
+        }
+    }
 }

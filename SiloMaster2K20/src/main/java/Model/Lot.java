@@ -73,4 +73,16 @@ public class Lot {
     public String toString() {
         return " ID : " +this.id + "\n TYPE: " + this.TypeCereale + "\n POIDS: " + this.poids + "\n QUALITE: " + this.qualite; 
     }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o.getClass() == Lot.class){
+            Lot test = (Lot)(o);
+            
+            return test.getId()==this.id;
+        }else{
+            return false;
+        }
+    }
+    
 }
