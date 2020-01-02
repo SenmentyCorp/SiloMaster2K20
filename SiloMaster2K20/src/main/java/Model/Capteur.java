@@ -87,4 +87,28 @@ public class Capteur {
         this.lstAlarme.add(a);
     }
     
+    public void retirerAlarme(int id){
+        for(int i=0; i< lstAlarme.size();i++){
+            if(this.lstAlarme.get(i).getId()==id){
+                lstAlarme.remove(i);
+            }
+        }
+    }
+    
+    public void retirerAlarme(Alarme a){
+        if(lstAlarme.contains(a)){
+            lstAlarme.remove(a);
+        }    
+    }
+    
+    public Alarme chercherAlarme(int id){
+        for(int i=0; i< lstAlarme.size();i++){
+            if(this.lstAlarme.get(i).getId()==id){
+                return lstAlarme.get(i);
+            }
+        }
+        return null;
+    }
+    
+    
 }
