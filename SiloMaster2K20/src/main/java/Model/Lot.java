@@ -30,6 +30,10 @@ public class Lot {
         return poids;
     }
 
+    public void setPoids(float poids) {
+        this.poids = poids;
+    }
+
     public String getQualite() {
         return qualite;
     }
@@ -49,10 +53,9 @@ public class Lot {
     /*
     Constucteur avec Poste
     */
-    public Lot(int id, String TypeCereale, float poids, String qualite, Commande commande, Poste poste) {
+    public Lot(int id, String TypeCereale, String qualite, Commande commande, Poste poste) {
         this.id = id;
         this.TypeCereale = TypeCereale;
-        this.poids = poids;
         this.qualite = qualite;
         this.commande = commande;
         this.poste = poste;
@@ -61,10 +64,9 @@ public class Lot {
     /*
     Constucteur sans Poste
     */
-    public Lot(int id, String TypeCereale, float poids, String qualite, Commande commande) {
+    public Lot(int id, String TypeCereale, String qualite, Commande commande) {
         this.id = id;
         this.TypeCereale = TypeCereale;
-        this.poids = poids;
         this.qualite = qualite;
         this.commande = commande;
     }
