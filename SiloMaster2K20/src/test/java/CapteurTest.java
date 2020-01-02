@@ -161,9 +161,18 @@ public class CapteurTest {
         assertEquals(c_presque_maxalarme.getLstAlarme().size(),size);
     }
 
+    // ------
+    
     @Test
-    public void testChercherAlarme() {
-        
+    public void testChercherAlarme_AlarmeTrouvee() {
+        // Recherche par id d'une alarme présente dans la liste
+        assertEquals(c_1alarme.chercherAlarme(1),a1);
+    }
+    
+    @Test
+    public void testChercherAlarme_AucuneAlarmeTrouvee() {
+        // Recherche par id d'une alarme non-présente dans la liste
+        assertEquals(c_1alarme.chercherAlarme(10),null);
     }
     
 }
