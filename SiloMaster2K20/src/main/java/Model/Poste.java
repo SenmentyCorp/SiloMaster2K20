@@ -17,6 +17,8 @@ public abstract class Poste {
     private boolean panne;
     private boolean plein;
     private ArrayList<Capteur> lstCapteur;
+    private Lot lot; 
+    
 
     public Poste(int id) {
         this.id = id;
@@ -56,6 +58,14 @@ public abstract class Poste {
     public void setLstCapteur(ArrayList<Capteur> lstCapteur) {
         this.lstCapteur = lstCapteur;
     }
+
+    public Lot getLot() {
+        return lot;
+    }
+
+    public void setLot(Lot lot) {
+        this.lot = lot;
+    }
     
     public void ajouterCapteur(Capteur c){
         this.lstCapteur.add(c);
@@ -83,8 +93,9 @@ public abstract class Poste {
         }
         return null;
     }
+      
     
     public abstract void traitement();
-    public abstract void suivant(int id);
+    public abstract void suivant();
     
 }
