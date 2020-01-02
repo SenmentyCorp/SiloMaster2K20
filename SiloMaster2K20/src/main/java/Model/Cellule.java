@@ -9,21 +9,22 @@ package Model;
  *
  * @author Lea
  */
-public class FosseReception extends Poste {
+public class Cellule extends Poste {
 
-    public FosseReception(int id) {
+    public Cellule(int id) {
         super(id);
     }
 
     @Override
     public void traitement() {
-        this.getLot().setPoids((float)(Math.random()*150000 + 300000));
+        
         
     }  
 
     @Override
     public void suivant() {
-        
+        setLot(null);
         
     }
+    
 }
