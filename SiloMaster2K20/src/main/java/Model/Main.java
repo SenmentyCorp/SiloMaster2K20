@@ -6,6 +6,7 @@
 package Model;
 
 import Engine.GestionEvenement;
+import Engine.ArchivageJSON;
 
 
 /**
@@ -18,5 +19,11 @@ public class Main {
         
         System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).toString());
         System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).getLot().toString());
+
+        ArchivageJSON arch = new ArchivageJSON();
+        arch.writeFileJSON();
+        arch.readFileJSON();
+
+        System.out.println(arch.getLstCommande().toString());
     }
 }

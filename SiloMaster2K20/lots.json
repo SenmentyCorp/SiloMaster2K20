@@ -1,0 +1,1 @@
+[{"id":1,"TypeCereale":"Mais","poids":0.0,"qualite":"Correcto","commande":{"id":1,"arrivee":"Jan 4, 2020 5:48:17 PM","depart":"Jan 4, 2020 5:48:17 PM","description":"Les bonnes cereales"}},{"id":2,"TypeCereale":"Mais","poids":0.0,"qualite":"Moyenno","commande":{"id":1,"arrivee":"Jan 4, 2020 5:48:17 PM","depart":"Jan 4, 2020 5:48:17 PM","description":"Les bonnes cereales"}}]
