@@ -50,6 +50,10 @@ public class ArchivageJSON {
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
 
+        this.lstCommande.clear();
+        this.lstLot.clear();
+        this.lstPoste.clear();
+
         //Lecture lots
         try{
             BufferedReader bfRd = new BufferedReader(new FileReader("lots.json"));
@@ -81,8 +85,8 @@ public class ArchivageJSON {
         final Gson gson = builder.create();
 
         Commande c = new Commande(1, Date.from(Instant.now()), Date.from(Instant.now()), "Les bonnes cereales");
-        Lot l = new Lot(1, "Mais", 12, "Correcto", c);
-        Lot ll = new Lot(2, "Mais", 16, "Moyenno", c);
+        Lot l = new Lot(1, "Mais", "Correcto", c);
+        Lot ll = new Lot(2, "Mais",  "Moyenno", c);
 
         this.lstLot.add(l);
         this.lstLot.add(ll);

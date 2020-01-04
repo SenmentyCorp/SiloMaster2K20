@@ -16,6 +16,7 @@ public class Capteur {
     private String TypeMesure;
     private float valeur;
     private ArrayList<Alarme> lstAlarme;
+    private final int maxAlarme;
 
     public int getId() {
         return id;
@@ -49,11 +50,17 @@ public class Capteur {
         this.lstAlarme = lstAlarme;
     }
 
-    public Capteur(int id, String TypeMesure, float valeur) {
+    public int getMaxAlarme() {
+        return maxAlarme;
+    }
+
+    
+    public Capteur(int id, String TypeMesure, float valeur, int max) {
         this.id = id;
         this.TypeMesure = TypeMesure;
         this.valeur = valeur;
         this.lstAlarme = new ArrayList<>();
+        this.maxAlarme = max;
     }
     
     @Override
@@ -84,7 +91,34 @@ public class Capteur {
     }
     
     public void ajouterAlarme(Alarme a){
+        if(lstAlarme.size()>=maxAlarme){
+            this.lstAlarme.remove(0);
+        }
         this.lstAlarme.add(a);
     }
+    
+    public void retirerAlarme(int id){
+        for(int i=0; i< lstAlarme.size();i++){
+            if(this.lstAlarme.get(i).getId()==id){
+                lstAlarme.remove(i);
+            }
+        }
+    }
+    
+    public void retirerAlarme(Alarme a){
+        if(lstAlarme.contains(a)){
+            lstAlarme.remove(a);
+        }    
+    }
+    
+    public Alarme chercherAlarme(int id){
+        for(int i=0; i< lstAlarme.size();i++){
+            if(this.lstAlarme.get(i).getId()==id){
+                return lstAlarme.get(i);
+            }
+        }
+        return null;
+    }
+    
     
 }

@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author Leaa
+ * @author Lea
  */
 public class Alarme {
     

@@ -21,7 +21,9 @@ public class Main {
         //System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).getLot().toString());
 
         ArchivageJSON arch = new ArchivageJSON();
-        //arch.writeFileJSON();
+        arch.writeFileJSON();
         arch.readFileJSON();
+
+        System.out.println("fin");
     }
 }

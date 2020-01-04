@@ -24,7 +24,7 @@ public class LotController {
     }
     
     public Lot creerLot(int id, String typeCereale, float poids, String qualite, Commande c){
-        return new Lot(id, typeCereale, poids, qualite, c);
+        return new Lot(id, typeCereale, qualite, c);
     }
    
 }
