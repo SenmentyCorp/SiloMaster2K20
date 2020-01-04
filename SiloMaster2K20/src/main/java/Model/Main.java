@@ -6,6 +6,7 @@
 package Model;
 
 import Engine.GestionEvenement;
+import Engine.ArchivageJSON;
 
 
 /**
@@ -16,7 +17,11 @@ public class Main {
     public static void main(String[] args) {
         GestionEvenement.getInstance().creerCommande();   
         
-        System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).toString());
-        System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).getLot().toString());
+        //System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).toString());
+        //System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).getLot().toString());
+
+        ArchivageJSON arch = new ArchivageJSON();
+        //arch.writeFileJSON();
+        arch.readFileJSON();
     }
 }
