@@ -85,7 +85,7 @@ public final class GestionEvenement {
         float poids = 10.0f;
         String qualite = "random";
         
-        Lot newLot = this.lotCtrl.creerLot(id, typeCereale, poids, qualite, c);
+        Lot newLot = this.lotCtrl.creerLot(id, typeCereale, qualite, c);
         
         this.archivage.getLstLot().add(newLot);
         
