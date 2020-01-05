@@ -7,12 +7,13 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
 
 /**
  *
  * @author Flavien
  */
-public class Silo {
+public class Silo{
 
     private ArrayList<Cellule> cellules;
 
@@ -29,7 +30,8 @@ public class Silo {
         }
         for (Cellule c : cellules) {
             c.setLot(new Lot(1,"aaa","bbb",new Commande(2,new Date(),new Date(),"ccc")));
-        }
+        }       
+        
         this.volume = Cellule.poidsMax * cellules.size();
         this.ac = new AC();
     }

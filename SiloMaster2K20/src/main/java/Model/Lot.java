@@ -5,11 +5,13 @@
  */
 package Model;
 
+import java.util.Observable;
+
 /**
  *
  * @author Alex-PC
  */
-public class Lot {
+public class Lot extends Observable{
     
     private int id;
     private String TypeCereale;
@@ -32,6 +34,8 @@ public class Lot {
 
     public void setPoids(float poids) {
         this.poids = poids;
+        setChanged();
+        notifyObservers();
     }
 
     public String getQualite() {
@@ -48,6 +52,8 @@ public class Lot {
 
     public void setPoste(Poste poste) {
         this.poste = poste;
+        setChanged();
+        notifyObservers();
     }
     
     /*

@@ -6,12 +6,13 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  *
  * @author Alex-PC
  */
-public abstract class Poste {
+public abstract class Poste extends Observable{
     
     private int id;
     private boolean panne;
@@ -43,6 +44,8 @@ public abstract class Poste {
 
     public void setId(int id) {
         this.id = id;
+        setChanged();
+        notifyObservers();
     }
 
     public boolean isPanne() {
@@ -51,6 +54,8 @@ public abstract class Poste {
 
     public void setPanne(boolean panne) {
         this.panne = panne;
+        setChanged();
+        notifyObservers();
     }
 
     public boolean isPlein() {
@@ -59,6 +64,8 @@ public abstract class Poste {
 
     public void setPlein(boolean plein) {
         this.plein = plein;
+        setChanged();
+        notifyObservers();
     }
 
     public ArrayList<Capteur> getLstCapteur() {
@@ -75,9 +82,11 @@ public abstract class Poste {
 
     public void setLot(Lot lot) {
         this.lot = lot;
-         if(lot != null){
+        if(lot != null){
             setPlein(true);        
         }
+        setChanged();
+        notifyObservers();
     }
     
     public void ajouterCapteur(Capteur c){
@@ -115,6 +124,8 @@ public abstract class Poste {
             this.suivant.setLot(this.getLot());
             this.setLot(null);
         }
+        setChanged();
+        notifyObservers();
     }
       
     public float getTemperature(){

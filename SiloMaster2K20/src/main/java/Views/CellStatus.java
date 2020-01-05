@@ -13,6 +13,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,7 +24,7 @@ import javax.swing.SwingUtilities;
  *
  * @author Flavien
  */
-public class CellStatus extends javax.swing.JPanel implements Simulable {
+public class CellStatus extends javax.swing.JPanel implements Simulable, Observer {
 
     private Cellule cell;
 
@@ -51,6 +53,10 @@ public class CellStatus extends javax.swing.JPanel implements Simulable {
         } catch (Exception e) {
 
         }
+        
+        cell.addObserver(this);
+        cell.getLot().addObserver(this);
+        
         updateData();
 
     }
@@ -347,4 +353,9 @@ public class CellStatus extends javax.swing.JPanel implements Simulable {
     private javax.swing.JLabel typeLabel;
     private javax.swing.JLabel volumeLabel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        updateData();
+    }
 }
