@@ -24,7 +24,7 @@ public class FosseReception extends Poste {
     }  
 
     @Override
-    public void suivant(ArrayList<Poste> suivants) {
+    public void suivant() {
         
         
     }

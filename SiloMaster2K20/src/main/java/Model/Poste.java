@@ -29,6 +29,14 @@ public abstract class Poste {
         this.suivant = suivant;
     }
 
+    public Poste(int id) {
+        this.id = id;
+        this.panne = false;
+        this.plein = false;
+        this.lstCapteur = new ArrayList<>();
+        this.suivant = null;
+    }
+    
     public int getId() {
         return id;
     }
@@ -96,21 +104,12 @@ public abstract class Poste {
         return null;
     }
     
-    public void suivant(ArrayList<Poste> suivants) {
-        boolean libre = false;
-        while(libre==false)
+    public void suivant() {
+        if(this.suivant.isPlein() ==false && this.suivant.isPanne())
         {
-            int i=0;
-            while(i<suivants.size() && libre==false)
-            {
-                if(suivants.get(i).isPlein()==false && suivants.get(i).isPanne() == false)
-                {
-                    suivants.get(i).setLot(this.getLot());
-                    this.setLot(null);
-                    this.setPlein(false);
-                    libre = true;
-                }
-            }
+            this.suivant.setPlein(true);
+            this.suivant.setPanne(true);
+            this.suivant.setLot(this.getLot());
         }
     }
       

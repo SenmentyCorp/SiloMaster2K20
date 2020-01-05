@@ -6,13 +6,19 @@
 package Engine;
 
 import Controllers.*;
+import Model.Boisseau;
+import Model.Cellule;
 import Model.Commande;
+import Model.FosseReception;
 import Model.Lot;
 import Model.Poste;
+import Model.Tremie;
 import java.util.Date;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -41,6 +47,7 @@ public final class GestionEvenement {
         archivage = new ArchivageJSON();
         commandeCtrl = new CommandeController();
         lotCtrl = new LotController();
+        posteCtrl = new PosteController();
     }
     
     public final static GestionEvenement getInstance(){
@@ -94,8 +101,31 @@ public final class GestionEvenement {
         return newLot;
     }
     
-    public Poste creerPoste(String type, int id){
-        Poste poste = this.posteCtrl.creerPoste(type, id);
-        return poste;
+    public void creerPostes()
+    {
+        List<Boisseau> boisseaux = new ArrayList<Boisseau>(); 
+        boisseaux.add(new Boisseau(1,null));
+        boisseaux.add(new Boisseau(2,null));
+        boisseaux.add(new Boisseau(3,null));
+        
+        List<Cellule> cellules = new ArrayList<Cellule>();
+        cellules.add(new Cellule(1));
+        cellules.add(new Cellule(2));
+        cellules.add(new Cellule(3));
+        cellules.add(new Cellule(4));
+        cellules.add(new Cellule(5));
+        cellules.add(new Cellule(6));
+        cellules.add(new Cellule(7));
+        cellules.add(new Cellule(8));
+        cellules.add(new Cellule(9));
+        cellules.add(new Cellule(10));
+        
+        Tremie tr1 = new Tremie(1);
+        Tremie tr2 = new Tremie(2);
+        
+        FosseReception fr1 = new FosseReception(1,tr1);
+        FosseReception fr2 = new FosseReception(2,tr2);
+        
     }
+    
 }

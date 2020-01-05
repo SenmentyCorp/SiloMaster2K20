@@ -6,6 +6,8 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -16,6 +18,11 @@ public class Cellule extends Poste {
     public Cellule(int id, Poste suivant) {
         super(id,suivant);
     }
+    
+    public Cellule(int id)
+    {
+        super(id);
+    }
 
     @Override
     public void traitement() {
@@ -23,9 +30,16 @@ public class Cellule extends Poste {
         
     }  
 
-    @Override
-    public void suivant(ArrayList<Poste> suivants) {
-        
+    public void suivant(List<Boisseau> boisseaux) {
+        for(int i =0; i<boisseaux.size();i++)
+        {
+            if(boisseaux.get(i).isPlein() ==false && boisseaux.get(i).isPanne() == false)
+            {
+                boisseaux.get(i).setLot(this.getLot());
+                this.setPlein(false);
+                this.setLot(null);
+            }
+        }
     }
     
 }
