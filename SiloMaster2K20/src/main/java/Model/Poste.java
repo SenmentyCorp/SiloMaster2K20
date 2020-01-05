@@ -65,6 +65,9 @@ public abstract class Poste {
 
     public void setLot(Lot lot) {
         this.lot = lot;
+         if(lot != null){
+            setPlein(true);        
+        }
     }
     
     public void ajouterCapteur(Capteur c){
