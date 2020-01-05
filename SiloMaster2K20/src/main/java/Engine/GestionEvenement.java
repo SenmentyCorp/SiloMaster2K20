@@ -152,9 +152,9 @@ public final class GestionEvenement {
     public void creerPostes()
     {
         ArrayList<Boisseau> boisseaux = new ArrayList<Boisseau>(); 
-        boisseaux.add(new Boisseau(1,null));
-        boisseaux.add(new Boisseau(2,null));
-        boisseaux.add(new Boisseau(3,null));
+        boisseaux.add(new Boisseau(1));
+        boisseaux.add(new Boisseau(2));
+        boisseaux.add(new Boisseau(3));
         
         ArrayList<Cellule> cellules = new ArrayList<Cellule>();
         cellules.add(new Cellule(1));
