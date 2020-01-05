@@ -21,10 +21,10 @@ import static org.mockito.Mockito.when;
  */
 public class TremieTest {
     
-    private static Tremie tr_vide, tr_panne, tr_plein, tr_ok;
+    private static Tremie tr_vide, tr_panne, tr_plein, tr_ok, tr_poids;
     private static ArrayList<Cellule> listeCell_vide, listeCell_panne, listeCell_plein, listeCell_ok;
     private static Cellule cell_panne, cell_plein, cell_ok;
-    private static Lot lot;
+    private static Lot lot, lot_poids;
     
     public TremieTest() {
     }
@@ -72,6 +72,10 @@ public class TremieTest {
         listeCell_ok.add(cell_ok);
         tr_ok.setSuivant(listeCell_ok);
         tr_ok.setLot(lot);
+        
+        lot_poids = new Lot(1,"Type","Qualite",null);
+        tr_poids = new Tremie(5);
+        tr_poids.setLot(lot_poids);
     }
     
     @AfterEach
@@ -80,6 +84,11 @@ public class TremieTest {
 
     @Test
     public void testTraitement() {
+        // Traitement, reduction du poids du lot
+        float poids = 100f;
+        tr_poids.getLot().setPoids(poids);
+        tr_poids.traitement();
+        assertEquals(tr_poids.getLot().getPoids(),poids*0.95f);
         
     }
     
