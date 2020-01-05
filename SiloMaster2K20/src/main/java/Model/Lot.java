@@ -19,6 +19,15 @@ public class Lot extends Observable{
     private String qualite;
     private Commande commande;
     private Poste poste;
+    private boolean traitementTermine;
+
+    public boolean isTraitementTermine() {
+        return traitementTermine;
+    }
+
+    public void setTraitementTermine(boolean traitementTermine) {
+        this.traitementTermine = traitementTermine;
+    }
 
     public int getId() {
         return id;
@@ -65,6 +74,7 @@ public class Lot extends Observable{
         this.qualite = qualite;
         this.commande = commande;
         this.poste = poste;
+        this.traitementTermine = false;
     }
 
     /*
@@ -75,6 +85,7 @@ public class Lot extends Observable{
         this.TypeCereale = TypeCereale;
         this.qualite = qualite;
         this.commande = commande;
+        this.traitementTermine = false;
     }
 
     @Override

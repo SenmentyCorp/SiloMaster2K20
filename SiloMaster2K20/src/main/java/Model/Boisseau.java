@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Engine.GestionEvenement;
 import java.util.ArrayList;
 
 /**
@@ -19,12 +20,9 @@ public class Boisseau extends Poste {
 
     @Override
     public void traitement() {
-        
-        
+        this.getLot().setTraitementTermine(true);
+        this.getLot().getCommande().setTraitementTermine(true);
+        this.setLot(null);
+        this.setPlein(false);
     }  
-
-    @Override
-    public void suivant() {
-        
-    }
 }

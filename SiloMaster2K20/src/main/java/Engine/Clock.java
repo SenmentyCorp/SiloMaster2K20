@@ -37,7 +37,7 @@ public class Clock implements Runnable {
             po.get(0).suivant();
             
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Clock.class.getName()).log(Level.SEVERE, null, ex);
             }

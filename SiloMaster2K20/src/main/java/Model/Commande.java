@@ -18,6 +18,16 @@ public class Commande {
     private Date depart;
     private String description;
     private Lot lot;
+    private boolean traitementTermine;
+
+    public boolean isTraitementTermine() {
+        return traitementTermine;
+    }
+
+    public void setTraitementTermine(boolean estTraite) {
+        this.traitementTermine = estTraite;
+    }
+    
 
     public int getId() {
         return id;
@@ -52,6 +62,7 @@ public class Commande {
         this.depart = depart;
         this.description = description;
         this.lot = lot;
+        this.traitementTermine = false;
     } 
 
     /*
@@ -62,6 +73,7 @@ public class Commande {
         this.arrivee = arrivee;
         this.depart = depart;
         this.description = description;
+        this.traitementTermine = false;
     }
     
     @Override
