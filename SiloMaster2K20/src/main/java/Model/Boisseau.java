@@ -33,5 +33,6 @@ public class Boisseau extends Poste {
         this.setPlein(false);
         setChanged();
         notifyObservers();
+        GestionEvenement.getInstance().getArchivage().writeFileJSON();
     }
 }

@@ -17,7 +17,6 @@ public class Commande {
     private Date arrivee;
     private Date depart;
     private String description;
-    private Lot lot;
     private boolean traitementTermine;
 
     public boolean isTraitementTermine() {
@@ -44,26 +43,6 @@ public class Commande {
     public String getDescription() {
         return description;
     }
-
-    public Lot getLot() {
-        return lot;
-    }
-
-    public void setLot(Lot lot) {
-        this.lot = lot;
-    }
-    
-    /*
-    Constructeur avec Lot en paramètre
-    */
-    public Commande(int id, Date arrivee, Date depart, String description, Lot lot) {
-        this.id = id;
-        this.arrivee = arrivee;
-        this.depart = depart;
-        this.description = description;
-        this.lot = lot;
-        this.traitementTermine = false;
-    } 
 
     /*
     Constructeur sans Lot en paramètre

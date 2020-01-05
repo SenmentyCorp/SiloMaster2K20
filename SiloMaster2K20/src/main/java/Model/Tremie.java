@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Engine.GestionEvenement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,6 +58,7 @@ public class Tremie extends Poste {
         }
         setChanged();
         notifyObservers();
+        GestionEvenement.getInstance().getArchivage().writeFileJSON();
     }
 
 }
