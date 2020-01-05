@@ -94,7 +94,23 @@ public abstract class Poste {
         return null;
     }
       
+    public float getTemperature(){
+        float res=0;
+        Capteur c;
+        for(int i=0;i<this.lstCapteur.size();i++)
+            if ((c=lstCapteur.get(i)).getTypeMesure().equals("Temperature"))
+            res+=c.getValeur();
+        return (float) (res/(lstCapteur.size()*1.0));
+    }
     
+     public float getHumidite(){
+         float res=0;
+        Capteur c;
+        for(int i=0;i<this.lstCapteur.size();i++)
+            if ((c=lstCapteur.get(i)).getTypeMesure().equals("Humidite"))
+            res+=c.getValeur();
+        return (float) (res/(lstCapteur.size()*1.0));
+    }
     public abstract void traitement();
     public abstract void suivant();
     

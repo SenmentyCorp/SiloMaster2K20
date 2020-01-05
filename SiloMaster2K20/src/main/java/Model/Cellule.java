@@ -11,20 +11,26 @@ package Model;
  */
 public class Cellule extends Poste {
 
+    public static final int poidsMax = 500;
+    private Ventilation vent;
+
     public Cellule(int id) {
         super(id);
+        this.vent=new Ventilation();
     }
 
     @Override
     public void traitement() {
-        
-        
-    }  
+
+    }
 
     @Override
     public void suivant() {
         setLot(null);
-        
+
     }
-    
+
+    public Ventilation getVent() {
+        return vent;
+    }
 }

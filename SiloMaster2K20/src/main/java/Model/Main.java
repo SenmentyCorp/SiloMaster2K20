@@ -7,6 +7,7 @@ package Model;
 
 import Engine.GestionEvenement;
 import Engine.ArchivageJSON;
+import Views.*;
 
 
 /**
@@ -15,7 +16,7 @@ import Engine.ArchivageJSON;
  */
 public class Main {
     public static void main(String[] args) {
-        GestionEvenement.getInstance().creerCommande();   
+       /* GestionEvenement.getInstance().creerCommande();   
         
         System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).toString());
         System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).getLot().toString());
@@ -24,6 +25,8 @@ public class Main {
         arch.writeFileJSON();
         arch.readFileJSON();
 
-        System.out.println(arch.getLstCommande().toString());
+        System.out.println(arch.getLstCommande().toString());*/
+       StatusSilo s=new StatusSilo(new Silo());
+       s.setVisible(true);
     }
 }
