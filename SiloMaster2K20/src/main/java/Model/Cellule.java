@@ -8,6 +8,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -15,6 +16,7 @@ import java.util.Set;
  */
 public class Cellule extends Poste {
     
+    private ArrayList<Boisseau> lstSuivant = new ArrayList<Boisseau>();
     public static final int poidsMax = 500;
     private Ventilation vent;
 
@@ -31,24 +33,28 @@ public class Cellule extends Poste {
     public void traitement() {
 
     }
-
-    public void suivant(List<Boisseau> boisseaux) {
-        for(int i =0; i<boisseaux.size();i++)
-        {
-            if(boisseaux.get(i).isPlein() ==false && boisseaux.get(i).isPanne() == false)
-            {
-                boisseaux.get(i).setLot(this.getLot());
-                boisseaux.get(i).setPlein(true);
-                this.setPlein(false);
-                this.setLot(null);
-            }
-        }
-    }
     
+    public void setSuivant(ArrayList<Boisseau> _lstSuivant){
+        this.lstSuivant = _lstSuivant;
+    }
+
     @Override
     public void suivant() {
-        setLot(null);
-
+        List<Boisseau> boDispo = this.lstSuivant.stream()
+                .filter(boisseau -> 
+                    !boisseau.isPanne() && 
+                    !boisseau.isPlein())
+                .collect(Collectors.toList());
+        
+        if(boDispo.size() != 0){
+            Boisseau boAModifier = boDispo.get(0);
+            
+            boAModifier.setLot(this.getLot());
+            boAModifier.setPlein(true);
+            
+            this.setPlein(false);
+            this.setLot(null);
+        }  
     }
 
     public Ventilation getVent() {

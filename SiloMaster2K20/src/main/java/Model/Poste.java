@@ -117,7 +117,7 @@ public abstract class Poste extends Observable{
     }
     
     public void suivant() {
-        if(this.suivant.isPlein() ==false && this.suivant.isPanne())
+        if(this.suivant.isPlein() == false && this.suivant.isPanne() == false)
         {
             this.suivant.setPlein(true);
             this.suivant.setPanne(false);
@@ -133,7 +133,7 @@ public abstract class Poste extends Observable{
         Capteur c;
         for(int i=0;i<this.lstCapteur.size();i++)
             if ((c=lstCapteur.get(i)).getTypeMesure().equals("Temperature"))
-            res+=c.getValeur();
+                res+=c.getValeur();
         return (float) (res/(lstCapteur.size()*1.0));
     }
     
@@ -142,7 +142,7 @@ public abstract class Poste extends Observable{
         Capteur c;
         for(int i=0;i<this.lstCapteur.size();i++)
             if ((c=lstCapteur.get(i)).getTypeMesure().equals("Humidite"))
-            res+=c.getValeur();
+                res+=c.getValeur();
         return (float) (res/(lstCapteur.size()*1.0));
     }
     public abstract void traitement();

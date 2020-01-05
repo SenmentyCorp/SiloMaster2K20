@@ -9,7 +9,6 @@ import Model.Poste;
 import Model.Boisseau;
 import Model.Cellule;
 import Model.FosseReception;
-import Model.PontBascule;
 import Model.Tremie;
 
 /**

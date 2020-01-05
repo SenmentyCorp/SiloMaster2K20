@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 
 /**
@@ -62,25 +64,35 @@ public final class GestionEvenement {
     }
     
     public void creerCommande(){
-        int id = 0;
+        List<Poste> fossesLibres = this.archivage.getLstPoste().stream().filter(
+                poste -> 
+                poste instanceof FosseReception
+                && poste.isPanne() == false 
+                && poste.isPlein() == false
+        ).collect(Collectors.toList());
         
-        if(this.archivage.getLstCommande().size() == 0){
-            id = 1;
-        }else{
-            id = this.archivage.getLstCommande().get(this.archivage.getLstCommande().size() - 1).getId() + 1;
-        } 
-        
-        Date arrivee = new Date(System.currentTimeMillis());
-        Date depart = null;
-        String desc = "rien";
-        
-        Commande newCommande = this.commandeCtrl.creerCommande(id, arrivee, depart, desc); 
-        newCommande.setLot(this.creerLot(newCommande));
-        
-        this.archivage.getLstCommande().add(newCommande);
+        if(fossesLibres.size() != 0){
+            
+            int id = 0;
+
+            if(this.archivage.getLstCommande().size() == 0){
+                id = 1;
+            }else{
+                id = this.archivage.getLstCommande().get(this.archivage.getLstCommande().size() - 1).getId() + 1;
+            } 
+
+            Date arrivee = new Date(System.currentTimeMillis());
+            Date depart = null;
+            String desc = "";
+
+            Commande newCommande = this.commandeCtrl.creerCommande(id, arrivee, depart, desc); 
+            newCommande.setLot(this.creerLot(newCommande, fossesLibres.get(0)));
+
+            this.archivage.getLstCommande().add(newCommande);
+        }   
     }
     
-    private Lot creerLot(Commande c){
+    private Lot creerLot(Commande c, Poste p){
         
         int id = 0;
         
@@ -89,26 +101,61 @@ public final class GestionEvenement {
         }else{
             id = this.archivage.getLstLot().get(this.archivage.getLstLot().size() - 1).getId() + 1;
         } 
-  
-        String typeCereale = "random";
-        float poids = 10.0f;
-        String qualite = "random";
+        
+        String typeCereale = "";
+        String qualite = "";
+        
+        Random rand = new Random();
+        int valeur = rand.nextInt(5);
+        
+        switch(valeur){
+            case 0:
+                typeCereale = "Orge";
+            break;
+            case 1:
+                typeCereale = "Malt";
+            break;
+            case 2:
+                typeCereale = "Blé";
+            break;
+            case 3:
+                typeCereale = "Maïs";
+            break;
+            case 4:
+                typeCereale = "Houblon";
+            break;
+        }
+        
+        valeur = rand.nextInt(2);
+        
+        switch(valeur){
+            case 0:
+                qualite = "Moyen";
+            break;
+            case 1:
+                qualite = "Bon";
+            break;
+            case 2:
+                qualite = "Très bon";
+            break;
+        }
         
         Lot newLot = this.lotCtrl.creerLot(id, typeCereale, qualite, c);
         
         this.archivage.getLstLot().add(newLot);
+        p.setLot(newLot);
         
         return newLot;
     }
     
     public void creerPostes()
     {
-        List<Boisseau> boisseaux = new ArrayList<Boisseau>(); 
+        ArrayList<Boisseau> boisseaux = new ArrayList<Boisseau>(); 
         boisseaux.add(new Boisseau(1,null));
         boisseaux.add(new Boisseau(2,null));
         boisseaux.add(new Boisseau(3,null));
         
-        List<Cellule> cellules = new ArrayList<Cellule>();
+        ArrayList<Cellule> cellules = new ArrayList<Cellule>();
         cellules.add(new Cellule(1));
         cellules.add(new Cellule(2));
         cellules.add(new Cellule(3));
@@ -120,11 +167,29 @@ public final class GestionEvenement {
         cellules.add(new Cellule(9));
         cellules.add(new Cellule(10));
         
+        for(Cellule c : cellules){
+            c.setSuivant(boisseaux);
+            this.archivage.getLstPoste().add(c);
+        }
+        
+        for(Boisseau b : boisseaux){
+            this.archivage.getLstPoste().add(b);
+        }
+        
         Tremie tr1 = new Tremie(1);
         Tremie tr2 = new Tremie(2);
         
+        tr1.setSuivant(cellules);
+        tr2.setSuivant(cellules);
+        
+        this.archivage.getLstPoste().add(tr1);
+        this.archivage.getLstPoste().add(tr2);
+        
         FosseReception fr1 = new FosseReception(1,tr1);
         FosseReception fr2 = new FosseReception(2,tr2);
+        
+        this.archivage.getLstPoste().add(fr1);
+        this.archivage.getLstPoste().add(fr2);
         
     }
     
