@@ -18,13 +18,15 @@ public abstract class Poste {
     private boolean plein;
     private ArrayList<Capteur> lstCapteur;
     private Lot lot; 
+    private Poste suivant;
     
 
-    public Poste(int id) {
+    public Poste(int id, Poste suivant) {
         this.id = id;
         this.panne = false;
         this.plein = false;
         this.lstCapteur = new ArrayList<>();
+        this.suivant = suivant;
     }
 
     public int getId() {
