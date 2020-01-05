@@ -75,6 +75,9 @@ public abstract class Poste {
 
     public void setLot(Lot lot) {
         this.lot = lot;
+         if(lot != null){
+            setPlein(true);        
+        }
     }
     
     public void ajouterCapteur(Capteur c){
@@ -114,7 +117,23 @@ public abstract class Poste {
         }
     }
       
+    public float getTemperature(){
+        float res=0;
+        Capteur c;
+        for(int i=0;i<this.lstCapteur.size();i++)
+            if ((c=lstCapteur.get(i)).getTypeMesure().equals("Temperature"))
+            res+=c.getValeur();
+        return (float) (res/(lstCapteur.size()*1.0));
+    }
     
+     public float getHumidite(){
+         float res=0;
+        Capteur c;
+        for(int i=0;i<this.lstCapteur.size();i++)
+            if ((c=lstCapteur.get(i)).getTypeMesure().equals("Humidite"))
+            res+=c.getValeur();
+        return (float) (res/(lstCapteur.size()*1.0));
+    }
     public abstract void traitement();
 
     

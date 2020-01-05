@@ -14,21 +14,23 @@ import java.util.Set;
  * @author Lea
  */
 public class Cellule extends Poste {
+    
+    public static final int poidsMax = 500;
+    private Ventilation vent;
 
     public Cellule(int id, Poste suivant) {
         super(id,suivant);
     }
     
-    public Cellule(int id)
-    {
+    public Cellule(int id) {
         super(id);
+        this.vent=new Ventilation();
     }
 
     @Override
     public void traitement() {
-        
-        
-    }  
+
+    }
 
     public void suivant(List<Boisseau> boisseaux) {
         for(int i =0; i<boisseaux.size();i++)
@@ -43,4 +45,13 @@ public class Cellule extends Poste {
         }
     }
     
+    @Override
+    public void suivant() {
+        setLot(null);
+
+    }
+
+    public Ventilation getVent() {
+        return vent;
+    }
 }
