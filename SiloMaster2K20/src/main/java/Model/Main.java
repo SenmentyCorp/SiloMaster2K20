@@ -26,6 +26,7 @@ public class Main {
         arch.readFileJSON();
 
         System.out.println(arch.getLstCommande().toString());*/
+       
        StatusSilo s=new StatusSilo(new Silo());
        s.setVisible(true);
     }

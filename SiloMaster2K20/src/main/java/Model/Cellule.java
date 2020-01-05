@@ -15,6 +15,7 @@ import java.util.Set;
  */
 public class Cellule extends Poste {
     
+    private ArrayList<Boisseau> lstSuivant = new ArrayList<Boisseau>();
     public static final int poidsMax = 500;
     private Ventilation vent;
 
@@ -31,24 +32,25 @@ public class Cellule extends Poste {
     public void traitement() {
 
     }
+    
+    public void setSuivant(ArrayList<Boisseau> _lstSuivant){
+        this.lstSuivant = _lstSuivant;
+    }
 
-    public void suivant(List<Boisseau> boisseaux) {
-        for(int i =0; i<boisseaux.size();i++)
+    @Override
+    public void suivant() {
+        boolean trouve = false;
+        for(int i =0; i<lstSuivant.size();i++)
         {
-            if(boisseaux.get(i).isPlein() ==false && boisseaux.get(i).isPanne() == false)
+            if(lstSuivant.get(i).isPlein() == false && lstSuivant.get(i).isPanne() == false && trouve == false)
             {
-                boisseaux.get(i).setLot(this.getLot());
-                boisseaux.get(i).setPlein(true);
+                trouve = true;
+                lstSuivant.get(i).setLot(this.getLot());
+                lstSuivant.get(i).setPlein(true);
                 this.setPlein(false);
                 this.setLot(null);
             }
         }
-    }
-    
-    @Override
-    public void suivant() {
-        setLot(null);
-
     }
 
     public Ventilation getVent() {
