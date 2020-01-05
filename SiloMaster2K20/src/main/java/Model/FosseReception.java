@@ -21,5 +21,7 @@ public class FosseReception extends Poste {
     public void traitement() {
         this.getLot().setPoids((float)(Math.random()*150 + 300));
         
+        setChanged();
+        notifyObservers();
     }  
 }

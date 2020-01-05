@@ -41,14 +41,13 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
         postes = l;
         initComponents();
         ImageIcon github;
-        try {
-
-        } catch (Exception e) {
-        }
+        
+        
+        
         for (Poste p : postes) {
             PosteStatus ps = new PosteStatus(p);
             switch (p.getClass().getSimpleName()) {
-                case "FosseRecuperation":
+                case "FosseReception":
                     panelFosses.add(ps);
                     break;
                 case "Tremie":

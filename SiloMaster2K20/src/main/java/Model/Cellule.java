@@ -57,6 +57,8 @@ public class Cellule extends Poste {
             this.setLot(null);
             boAModifier.traitement();
         }  
+        setChanged();
+        notifyObservers();
     }
 
     public Ventilation getVent() {

@@ -28,7 +28,9 @@ public class Tremie extends Poste {
     
     @Override
     public void traitement() {
-        this.getLot().setPoids((float)((getLot().getPoids())*0.95));   
+        this.getLot().setPoids((float)((getLot().getPoids())*0.95)); 
+        setChanged();
+        notifyObservers();  
     }  
 
     public void setSuivant(ArrayList<Cellule> _lstSuivant){
@@ -53,6 +55,8 @@ public class Tremie extends Poste {
             this.setLot(null);
             cellAModifier.traitement();
         }
+        setChanged();
+        notifyObservers();
     }
 
 }

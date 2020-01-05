@@ -20,9 +20,18 @@ public class Boisseau extends Poste {
 
     @Override
     public void traitement() {
+        setChanged();
+        notifyObservers();
+    }  
+        
+        
+    @Override
+    public void suivant() {
         this.getLot().setTraitementTermine(true);
         this.getLot().getCommande().setTraitementTermine(true);
         this.setLot(null);
         this.setPlein(false);
-    }  
+        setChanged();
+        notifyObservers();
+    }
 }

@@ -30,9 +30,13 @@ public class Main {
         arch.writeFileJSON();
         arch.readFileJSON();
 
-        System.out.println(arch.getLstCommande().toString());*/
+        System.out.println(arch.getLstCommande().toString());
        
        StatusSilo s=new StatusSilo(new Silo());
-       s.setVisible(true);
+       s.setVisible(true);*/
+       
+       
+       SiloMaster2K20 slm = new SiloMaster2K20(GestionEvenement.getInstance().getArchivage().getLstPoste());
+       slm.setVisible(true);
     }
 }
