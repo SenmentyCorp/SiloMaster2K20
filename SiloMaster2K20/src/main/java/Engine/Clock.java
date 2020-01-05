@@ -8,7 +8,6 @@ package Engine;
 import Model.Boisseau;
 import Model.Cellule;
 import Model.FosseReception;
-import Model.PontBascule;
 import Model.Tremie;
 import java.util.ArrayList;
 import java.util.List;
