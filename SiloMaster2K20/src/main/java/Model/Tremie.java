@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Lea
@@ -22,7 +24,7 @@ public class Tremie extends Poste {
     }  
 
     @Override
-    public void suivant() {
+    public void suivant(ArrayList<Poste> suivants) {
         
         
     }

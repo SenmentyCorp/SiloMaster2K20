@@ -17,6 +17,7 @@ public class Capteur {
     private float valeur;
     private ArrayList<Alarme> lstAlarme;
     private final int maxAlarme;
+    private Poste poste;
 
     public int getId() {
         return id;
@@ -58,6 +59,15 @@ public class Capteur {
     public Capteur(int id, String TypeMesure, float valeur, int max) {
         this.id = id;
         this.TypeMesure = TypeMesure;
+        this.valeur = valeur;
+        this.lstAlarme = new ArrayList<>();
+        this.maxAlarme = max;
+    }
+    
+        public Capteur(int id, String TypeMesure,Poste poste, float valeur, int max) {
+        this.id = id;
+        this.TypeMesure = TypeMesure;
+        this.poste=poste;
         this.valeur = valeur;
         this.lstAlarme = new ArrayList<>();
         this.maxAlarme = max;

@@ -8,6 +8,7 @@ package Engine;
 import Controllers.*;
 import Model.Commande;
 import Model.Lot;
+import Model.Poste;
 import java.util.Date;
 
 import com.google.gson.Gson;
@@ -26,6 +27,7 @@ public final class GestionEvenement {
     private ArchivageJSON archivage;
     private CommandeController commandeCtrl;
     private LotController lotCtrl;
+    private PosteController posteCtrl;
 
     public ArchivageJSON getArchivage() {
         return archivage;
@@ -90,5 +92,10 @@ public final class GestionEvenement {
         this.archivage.getLstLot().add(newLot);
         
         return newLot;
+    }
+    
+    public Poste creerPoste(String type, int id){
+        Poste poste = this.posteCtrl.creerPoste(type, id);
+        return poste;
     }
 }

@@ -93,9 +93,27 @@ public abstract class Poste {
         }
         return null;
     }
+    
+    public void suivant(ArrayList<Poste> suivants) {
+        boolean libre = false;
+        while(libre==false)
+        {
+            int i=0;
+            while(i<suivants.size() && libre==false)
+            {
+                if(suivants.get(i).isPlein()==false && suivants.get(i).isPanne() == false)
+                {
+                    suivants.get(i).setLot(this.getLot());
+                    this.setLot(null);
+                    this.setPlein(false);
+                    libre = true;
+                }
+            }
+        }
+    }
       
     
     public abstract void traitement();
-    public abstract void suivant();
+
     
 }

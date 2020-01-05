@@ -7,20 +7,20 @@ package Model;
 
 import java.util.ArrayList;
 
+
 /**
  *
- * @author Lea
+ * @author PC
  */
-public class FosseReception extends Poste {
-
-    public FosseReception(int id) {
+public class PontBascule extends Poste{
+    public PontBascule(int id) {
         super(id);
     }
 
     @Override
     public void traitement() {
-        this.getLot().setPoids((float)(Math.random()*150000 + 300000));
-        
+        float poid= (float) (1+Math.ceil(Math.random() * 10));
+        this.getLot().setPoids(poid);
     }  
 
     @Override
@@ -28,4 +28,5 @@ public class FosseReception extends Poste {
         
         
     }
+    
 }
