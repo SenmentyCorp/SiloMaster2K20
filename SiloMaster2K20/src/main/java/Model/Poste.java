@@ -122,7 +122,9 @@ public abstract class Poste extends Observable{
             this.suivant.setPlein(true);
             this.suivant.setPanne(false);
             this.suivant.setLot(this.getLot());
+            this.suivant.traitement();
             this.setLot(null);
+            this.plein = false;
         }
         setChanged();
         notifyObservers();

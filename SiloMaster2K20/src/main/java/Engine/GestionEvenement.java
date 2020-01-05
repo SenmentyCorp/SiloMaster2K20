@@ -144,6 +144,7 @@ public final class GestionEvenement {
         
         this.archivage.getLstLot().add(newLot);
         p.setLot(newLot);
+        p.traitement();
         
         return newLot;
     }

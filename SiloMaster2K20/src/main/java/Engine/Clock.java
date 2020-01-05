@@ -5,12 +5,13 @@
  */
 package Engine;
 
-import Model.Boisseau;
-import Model.Cellule;
-import Model.FosseReception;
-import Model.Tremie;
+import Model.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 
 /**
@@ -18,8 +19,29 @@ import java.util.List;
  * @author PC
  */
 public class Clock implements Runnable {
-    public void run()
-    {       
+    
+    public void run(){       
+       
         GestionEvenement.getInstance().creerPostes();
+        
+        while(true){
+        
+            GestionEvenement.getInstance().creerCommande();
+            List<Poste> po = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
+                                        poste ->
+                                        poste.isPanne() == false 
+                                        && poste.isPlein() == true
+                                ).collect(Collectors.toList());
+            
+            Collections.shuffle(po);
+            po.get(0).suivant();
+            
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Clock.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }
 }

@@ -7,6 +7,7 @@ package Model;
 
 import Engine.GestionEvenement;
 import Engine.ArchivageJSON;
+import Engine.Clock;
 import Views.*;
 
 
@@ -16,6 +17,10 @@ import Views.*;
  */
 public class Main {
     public static void main(String[] args) {
+        
+        Clock cl = new Clock();
+        new Thread(cl).start();
+        
        /* GestionEvenement.getInstance().creerCommande();   
         
         System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).toString());

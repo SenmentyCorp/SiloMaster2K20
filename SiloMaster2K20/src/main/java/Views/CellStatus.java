@@ -43,8 +43,9 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
      * @param c Cellule observée
      */
     public CellStatus(Cellule c) {
+        
         cell = c;
-
+        
         isFanOn = false;
         initComponents();
         try {
@@ -55,23 +56,34 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
         }
         
         cell.addObserver(this);
-        cell.getLot().addObserver(this);
         
-        updateData();
-
+        updateData();  
     }
 
     @Override
     public void updateData() {
-        Lot l = cell.getLot();
-        grainType.setText(l.getTypeCereale());
-        grainMeanTemperature.setText(Float.toString(cell.getTemperature()) + "°C");
-        grainHumidity.setText(Double.toString(cell.getHumidite()) + "%");
-        cellCurrentVolumeBar.setValue((int) (l.getPoids() / cell.poidsMax * 100));
-        fanSpeed.setValue(cell.getVent().getPuissance());
-        cellNumber.setText("Cellule numéro " + cell.getId());
-        cellVolume.setText(Cellule.poidsMax + "m^3");
-        isFanOn = (cell.getVent().getPuissance() > 0);
+        
+        if(cell.getLot() != null){
+            Lot l = cell.getLot();
+            grainType.setText(l.getTypeCereale());
+            grainMeanTemperature.setText(Float.toString(cell.getTemperature()) + "°C");
+            grainHumidity.setText(Double.toString(cell.getHumidite()) + "%");
+            cellCurrentVolumeBar.setValue((int) (l.getPoids() / cell.poidsMax * 100));
+            fanSpeed.setValue(cell.getVent().getPuissance());
+            cellNumber.setText("Cellule numéro " + cell.getId());
+            cellVolume.setText(Cellule.poidsMax + "m^3");
+            isFanOn = (cell.getVent().getPuissance() > 0);
+        }else{
+            grainType.setText(" --- ");
+            grainMeanTemperature.setText("-- °C");
+            grainHumidity.setText("-- %");
+            cellCurrentVolumeBar.setValue(0);
+            fanSpeed.setValue(cell.getVent().getPuissance());
+            cellNumber.setText("Cellule numéro " + cell.getId());
+            cellVolume.setText(Cellule.poidsMax + "m^3");
+            isFanOn = (cell.getVent().getPuissance() > 0);
+        }
+        
         autoResizeFan();
         updateFan();
         this.repaint();
@@ -325,7 +337,9 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
     }//GEN-LAST:event_fanImagePanelComponentResized
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new LotInfo((JFrame) SwingUtilities.getWindowAncestor(this), true, cell.getLot().toString()).setVisible(true);
+        if(cell.getLot()!=null){
+            new LotInfo((JFrame) SwingUtilities.getWindowAncestor(this), true, cell.getLot().toString()).setVisible(true);            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

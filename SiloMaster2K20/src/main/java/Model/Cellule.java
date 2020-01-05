@@ -31,7 +31,8 @@ public class Cellule extends Poste {
 
     @Override
     public void traitement() {
-
+        setChanged();
+        notifyObservers();
     }
     
     public void setSuivant(ArrayList<Boisseau> _lstSuivant){
@@ -54,6 +55,7 @@ public class Cellule extends Poste {
             
             this.setPlein(false);
             this.setLot(null);
+            boAModifier.traitement();
         }  
     }
 

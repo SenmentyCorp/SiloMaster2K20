@@ -5,9 +5,12 @@
  */
 package Model;
 
+import Engine.GestionEvenement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Observable;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -24,13 +27,11 @@ public class Silo{
     public int volume;
 
     public Silo() {
-        cellules = new ArrayList<Cellule>();
-        for (int i = 0; i < 10; i++) {
-            cellules.add(new Cellule(cellules.size() + 1));
-        }
-        for (Cellule c : cellules) {
-            c.setLot(new Lot(1,"aaa","bbb",new Commande(2,new Date(),new Date(),"ccc")));
-        }       
+        List<Poste> postesCell = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
+                poste -> 
+                poste instanceof Cellule).collect(Collectors.toList());
+        
+        cellules = new ArrayList(postesCell);
         
         this.volume = Cellule.poidsMax * cellules.size();
         this.ac = new AC();
