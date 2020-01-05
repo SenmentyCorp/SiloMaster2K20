@@ -78,6 +78,9 @@ public abstract class Poste {
          if(lot != null){
             setPlein(true);        
         }
+        else{
+            setPlein(false);
+        }
     }
     
     public void ajouterCapteur(Capteur c){
