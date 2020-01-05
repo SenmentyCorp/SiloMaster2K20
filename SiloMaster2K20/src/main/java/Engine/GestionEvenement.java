@@ -156,9 +156,9 @@ public final class GestionEvenement {
         this.archivage.readFileJSON();
         
         ArrayList<Boisseau> boisseaux = new ArrayList<Boisseau>(); 
-        boisseaux.add(new Boisseau(1,null));
-        boisseaux.add(new Boisseau(2,null));
-        boisseaux.add(new Boisseau(3,null));
+        boisseaux.add(new Boisseau(1));
+        boisseaux.add(new Boisseau(2));
+        boisseaux.add(new Boisseau(3));
         
         ArrayList<Cellule> cellules = new ArrayList<Cellule>();
         cellules.add(new Cellule(1));
@@ -174,6 +174,10 @@ public final class GestionEvenement {
         
         for(Cellule c : cellules){
             c.setSuivant(boisseaux);
+            c.ajouterCapteur(new Capteur(c.getId(),"Temperature",10));
+            c.chercherCapteur(c.getId()).genererValeur("Temperature");
+            c.ajouterCapteur(new Capteur(c.getId()+10,"Humidite",10));
+            c.chercherCapteur(c.getId()+10).genererValeur("Humidite");
             this.archivage.getLstPoste().add(c);
         }
         

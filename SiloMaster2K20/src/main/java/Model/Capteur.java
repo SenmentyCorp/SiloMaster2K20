@@ -54,7 +54,13 @@ public class Capteur {
     public int getMaxAlarme() {
         return maxAlarme;
     }
-
+    
+    public Capteur(int id, String TypeMesure, int max) {
+        this.id = id;
+        this.TypeMesure = TypeMesure;
+        this.lstAlarme = new ArrayList<>();
+        this.maxAlarme = max;
+    }
     
     public Capteur(int id, String TypeMesure, float valeur, int max) {
         this.id = id;
@@ -97,8 +103,13 @@ public class Capteur {
     }
     
     public void declencherAlarme(Alarme a){
-        poste.setPanne(true);
-        ajouterAlarme(a);
+        if(poste.getClass()== Cellule.class){
+            if((TypeMesure.equals("Temperature") && valeur > 15) || (TypeMesure.equals("Humidite") && valeur > 15)){
+                poste.setPanne(true);
+                a.setTypeAlarme(TypeMesure);
+                ajouterAlarme(a);
+            }
+        } 
     }
     
     public void ajouterAlarme(Alarme a){
@@ -130,6 +141,15 @@ public class Capteur {
         }
         return null;
     }
+    public void genererValeur(String type){
+        switch(type){
+        case"Temperature": valeur=(float)(Math.random()*7.0+10.0);
+                          break;
+                          
+        case"Humidite": valeur=(float)(Math.random()*10.0+7.0);
+                          break;
+        }
     
+    }
     
 }

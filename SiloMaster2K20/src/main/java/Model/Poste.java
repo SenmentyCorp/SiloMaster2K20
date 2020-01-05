@@ -135,19 +135,29 @@ public abstract class Poste extends Observable{
     public float getTemperature(){
         float res=0;
         Capteur c;
+        int compteur = 0;
         for(int i=0;i<this.lstCapteur.size();i++)
-            if ((c=lstCapteur.get(i)).getTypeMesure().equals("Temperature"))
+            if ((c=lstCapteur.get(i)).getTypeMesure().equals("Temperature")){
                 res+=c.getValeur();
-        return (float) (res/(lstCapteur.size()*1.0));
+                compteur++;
+            }
+        if(compteur != 0)
+            return (float) (res/(compteur * 1.0));
+        else return (float) -1.0;
     }
     
      public float getHumidite(){
-         float res=0;
+        float res=0;
         Capteur c;
+        int compteur = 0;
         for(int i=0;i<this.lstCapteur.size();i++)
-            if ((c=lstCapteur.get(i)).getTypeMesure().equals("Humidite"))
+            if ((c=lstCapteur.get(i)).getTypeMesure().equals("Humidite")){
                 res+=c.getValeur();
-        return (float) (res/(lstCapteur.size()*1.0));
+                compteur++;
+            }
+        if(compteur != 0)
+            return (float) (res/(compteur * 1.0));
+        else return (float) -1.0;
     }
     public abstract void traitement();
 

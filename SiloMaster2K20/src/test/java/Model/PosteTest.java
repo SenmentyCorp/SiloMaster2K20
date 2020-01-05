@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  *
@@ -17,9 +18,9 @@ import static org.mockito.Mockito.mock;
  */
 public class PosteTest {
     
-    private static PosteImpl poste_panne, poste_plein, poste1, poste_0capt, poste_1capt, poste_2capt;
+    private static PosteImpl poste_panne, poste_plein, poste1, poste_0capt, poste_1capt, poste_2capt, poste_temp, poste_hum, poste_suiv;
     private static Lot lot;
-    private static Capteur capt1, capt2, capt3;
+    private static Capteur capt1, capt2, capt3, capt4, capt5, capt6;
     
     public PosteTest() {
     }
@@ -36,9 +37,35 @@ public class PosteTest {
         
         poste1 = new PosteImpl(3);
         
-        capt1 = new Capteur(1,"Mesure",1f,10);
-        capt2 = new Capteur(2,"Mesure",1f,10);
-        capt3 = new Capteur(3,"Mesure",1f,10);
+        capt1 = mock(Capteur.class);
+        when(capt1.getId()).thenReturn(1);
+        when(capt1.getTypeMesure()).thenReturn("Temperature");
+        when(capt1.getValeur()).thenReturn(1f);
+        
+        capt2 = mock(Capteur.class);
+        when(capt2.getId()).thenReturn(2);
+        when(capt2.getTypeMesure()).thenReturn("Temperature");
+        when(capt2.getValeur()).thenReturn(3f);
+        
+        capt3 = mock(Capteur.class);
+        when(capt3.getId()).thenReturn(3);
+        when(capt3.getTypeMesure()).thenReturn("Temperature");
+        when(capt3.getValeur()).thenReturn(7f);
+        
+        capt4 = mock(Capteur.class);
+        when(capt4.getId()).thenReturn(4);
+        when(capt4.getTypeMesure()).thenReturn("Humidite");
+        when(capt4.getValeur()).thenReturn(12f);
+        
+        capt5 = mock(Capteur.class);
+        when(capt5.getId()).thenReturn(5);
+        when(capt5.getTypeMesure()).thenReturn("Humidite");
+        when(capt5.getValeur()).thenReturn(7f);
+        
+        capt6 = mock(Capteur.class);
+        when(capt6.getId()).thenReturn(6);
+        when(capt6.getTypeMesure()).thenReturn("Humidite");
+        when(capt6.getValeur()).thenReturn(13f);
         
         poste_0capt = new PosteImpl(4);
         
@@ -48,6 +75,20 @@ public class PosteTest {
         poste_2capt = new PosteImpl(6);
         poste_2capt.ajouterCapteur(capt1);
         poste_2capt.ajouterCapteur(capt2);
+        
+        poste_temp = new PosteImpl(7);
+        poste_temp.ajouterCapteur(capt1);
+        poste_temp.ajouterCapteur(capt2);
+        poste_temp.ajouterCapteur(capt3);
+        
+        poste_hum = new PosteImpl(8);
+        poste_hum.ajouterCapteur(capt4);
+        poste_hum.ajouterCapteur(capt5);
+        poste_hum.ajouterCapteur(capt6);
+        
+        poste_suiv = new PosteImpl(9, poste1);
+        poste_suiv.setLot(lot);
+        
     }
     
     @AfterEach
@@ -155,7 +196,9 @@ public class PosteTest {
     @Test
     public void testRetirerCapteur_Capteur_AucunCapteurTrouve() {
         // Retire un capteur pas present
-        poste_2capt.retirerCapteur(new Capteur(10,"Mesure",1f,10));
+        Capteur c = mock(Capteur.class);
+        when(c.getId()).thenReturn(10);
+        poste_2capt.retirerCapteur(c);
         assertEquals(poste_2capt.getLstCapteur().size(),2);
     }
 
@@ -174,26 +217,43 @@ public class PosteTest {
     }
 
     @Test
-    public void testTraitement() {
-        
+    public void testGetTemperature() {
+        // Temperature moyenne
+        float moy = (1f + 3f + 7f) / 3f;
+        assertEquals(poste_temp.getTemperature(),moy);
     }
 
     @Test
+    public void testGetHumidite() {
+        // Humidite moyenne
+        float moy = (12f + 7f + 13f) / 3f;
+        assertEquals(poste_hum.getHumidite(),moy);
+    }
+    
+    @Test
     public void testSuivant() {
-        
+        poste_suiv.suivant();
+        assertEquals(poste1.getLot(),lot);
+        assertEquals(poste1.isPlein(),true);
+        assertEquals(poste_suiv.getLot(),null);
+        assertEquals(poste_suiv.isPlein(),false);
     }
 
+    // Classe fille de Poste n'implementant aucune nouveaute
+    // Permet uniquement d'instancier Poste pour les tests
     public static class PosteImpl extends Poste {
 
         public PosteImpl(int id) {
             super(id);
         }
+        
+        public PosteImpl(int id, Poste suiv) {
+            super(id, suiv);
+        }
 
         public void traitement() {
         }
-
-        public void suivant() {
-        }
+        
     }
     
 }

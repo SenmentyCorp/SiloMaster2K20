@@ -27,7 +27,6 @@ public class CapteurTest {
     
     @BeforeEach
     public static void setUp() {
-        System.out.println("oui");
         max = 3;
         a1 = mock(Alarme.class);
         when(a1.getId()).thenReturn(1);
