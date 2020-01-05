@@ -44,6 +44,7 @@ public class BoisseauTest {
     
     @Test
     public void testTraitement() {
+        // Traitement termine pour lot et commande, lot deplace
         boisseau.traitement();
         assertEquals(l.isTraitementTermine(),true);
         assertEquals(c.isTraitementTermine(),true);
