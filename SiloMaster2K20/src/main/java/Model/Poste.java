@@ -108,7 +108,7 @@ public abstract class Poste {
     }
     
     public void suivant() {
-        if(this.suivant.isPlein() ==false && this.suivant.isPanne())
+        if(this.suivant.isPlein() == false && this.suivant.isPanne() == false)
         {
             this.suivant.setPlein(true);
             this.suivant.setPanne(false);
