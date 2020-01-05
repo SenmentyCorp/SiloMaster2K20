@@ -44,12 +44,6 @@ public class Cellule extends Poste {
             }
         }
     }
-    
-    @Override
-    public void suivant() {
-        setLot(null);
-
-    }
 
     public Ventilation getVent() {
         return vent;
