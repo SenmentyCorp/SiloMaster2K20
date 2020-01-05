@@ -7,6 +7,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -37,17 +38,20 @@ public class Tremie extends Poste {
 
     @Override
     public void suivant() {
-        boolean trouve = false;
-        for(int i=0; i<this.lstSuivant.size();i++)
-        {
-            if(lstSuivant.get(i).isPlein() == false && lstSuivant.get(i).isPanne() == false && trouve == false)
-            {
-                trouve = true;
-                lstSuivant.get(i).setLot(this.getLot());
-                lstSuivant.get(i).setPlein(true);
-                this.setPlein(false);
-                this.setLot(null);
-            }
+        List<Cellule> cellDispo = this.lstSuivant.stream()
+                .filter(cell -> 
+                    !cell.isPanne() && 
+                    !cell.isPlein())
+                .collect(Collectors.toList());
+        
+        if(cellDispo.size() != 0){
+            Cellule cellAModifier = cellDispo.get(0);
+            
+            cellAModifier.setLot(this.getLot());
+            cellAModifier.setPlein(true);
+            
+            this.setPlein(false);
+            this.setLot(null);
         }
     }
 
