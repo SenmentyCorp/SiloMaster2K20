@@ -49,9 +49,8 @@ public class StatusSilo extends javax.swing.JFrame implements Simulable {
         ACPanel = new javax.swing.JPanel();
         CellPanel = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1720, 530));
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         ACPanel.setBackground(FrameBasique.BackgroundColor);
         ACPanel.setLayout(new java.awt.BorderLayout());
