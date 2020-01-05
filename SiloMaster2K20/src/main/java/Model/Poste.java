@@ -122,7 +122,7 @@ public abstract class Poste {
         Capteur c;
         for(int i=0;i<this.lstCapteur.size();i++)
             if ((c=lstCapteur.get(i)).getTypeMesure().equals("Temperature"))
-            res+=c.getValeur();
+                res+=c.getValeur();
         return (float) (res/(lstCapteur.size()*1.0));
     }
     
@@ -131,7 +131,7 @@ public abstract class Poste {
         Capteur c;
         for(int i=0;i<this.lstCapteur.size();i++)
             if ((c=lstCapteur.get(i)).getTypeMesure().equals("Humidite"))
-            res+=c.getValeur();
+                res+=c.getValeur();
         return (float) (res/(lstCapteur.size()*1.0));
     }
     public abstract void traitement();
