@@ -25,7 +25,7 @@ public class PosteController {
         Poste poste=null;
         if (type == "Boisseau")
         {
-            poste = new Boisseau(id,suivant);
+            poste = new Boisseau(id);
         }
         if (type == "Cellule")
         {
@@ -35,13 +35,9 @@ public class PosteController {
         {
             poste = new FosseReception(id, suivant);
         }
-        if (type == "PontBascule")
-        {
-            poste = new Boisseau(id, suivant);
-        }
         if (type == "Tremie")
         {
-            poste = new Boisseau(id, suivant);
+            poste = new Tremie(id, suivant);
         }
         return poste;
     }
