@@ -170,6 +170,10 @@ public final class GestionEvenement {
         
         for(Cellule c : cellules){
             c.setSuivant(boisseaux);
+            c.ajouterCapteur(new Capteur(c.getId(),"Temperature",10));
+            c.chercherCapteur(c.getId()).genererValeur("Temperature");
+            c.ajouterCapteur(new Capteur(c.getId()+10,"Humidite",10));
+            c.chercherCapteur(c.getId()+10).genererValeur("Humidite");
             this.archivage.getLstPoste().add(c);
         }
         
