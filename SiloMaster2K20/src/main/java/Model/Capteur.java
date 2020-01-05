@@ -96,8 +96,9 @@ public class Capteur {
         }
     }
     
-    public void declencherAlarme(){
-        System.out.println("Not implemented yet");
+    public void declencherAlarme(Alarme a){
+        poste.setPanne(true);
+        ajouterAlarme(a);
     }
     
     public void ajouterAlarme(Alarme a){

@@ -19,7 +19,7 @@ public class FosseReception extends Poste {
 
     @Override
     public void traitement() {
-        this.getLot().setPoids((float)(Math.random()*150 + 200));
+        this.getLot().setPoids((float)(Math.random()*150 + 300));
         
     }  
 }

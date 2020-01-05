@@ -84,6 +84,8 @@ public abstract class Poste extends Observable{
         this.lot = lot;
         if(lot != null){
             setPlein(true);        
+        }else{
+            setPlein(false);
         }
         setChanged();
         notifyObservers();
