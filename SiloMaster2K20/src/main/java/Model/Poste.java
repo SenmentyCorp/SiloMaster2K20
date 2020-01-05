@@ -108,8 +108,9 @@ public abstract class Poste {
         if(this.suivant.isPlein() ==false && this.suivant.isPanne())
         {
             this.suivant.setPlein(true);
-            this.suivant.setPanne(true);
+            this.suivant.setPanne(false);
             this.suivant.setLot(this.getLot());
+            this.setLot(null);
         }
     }
       

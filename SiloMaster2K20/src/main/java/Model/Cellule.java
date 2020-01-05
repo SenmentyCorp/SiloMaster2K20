@@ -36,6 +36,7 @@ public class Cellule extends Poste {
             if(boisseaux.get(i).isPlein() ==false && boisseaux.get(i).isPanne() == false)
             {
                 boisseaux.get(i).setLot(this.getLot());
+                boisseaux.get(i).setPlein(true);
                 this.setPlein(false);
                 this.setLot(null);
             }
