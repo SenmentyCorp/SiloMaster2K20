@@ -53,10 +53,15 @@ public class Clock implements Runnable {
         
         PontBascule pb1 = (PontBascule) GestionEvenement.getInstance().creerPoste("PontBascule", 1);
         
+        
+        
         while (true)
         {
-            int chanceNouveauLot = (int) Math.ceil(Math.random() * 10);
-            if(chanc)
+            double chanceNouveauLot =  Math.ceil(Math.random() * 10);
+            if(chanceNouveauLot<=1)
+            {
+                
+            }
         }
     }
 }

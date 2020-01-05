@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Boisseau extends Poste {
 
-    public Boisseau(int id) {
-        super(id);
+    public Boisseau(int id, Poste suivant) {
+        super(id,suivant);
     }
 
     @Override
@@ -25,7 +25,6 @@ public class Boisseau extends Poste {
 
     @Override
     public void suivant(ArrayList<Poste> suivants) {
-        
         
     }
 }

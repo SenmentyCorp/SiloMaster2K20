@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class FosseReception extends Poste {
 
-    public FosseReception(int id) {
-        super(id);
+    public FosseReception(int id, Poste suivant) {
+        super(id,suivant);
     }
 
     @Override

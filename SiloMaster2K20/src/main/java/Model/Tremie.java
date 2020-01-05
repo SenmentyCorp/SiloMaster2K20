@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class Tremie extends Poste {
 
-    public Tremie(int id) {
-        super(id);
+    public Tremie(int id, Poste suivant) {
+        super(id,suivant);
     }
-
+    
     @Override
     public void traitement() {
         this.getLot().setPoids((float)((getLot().getPoids())*0.95));

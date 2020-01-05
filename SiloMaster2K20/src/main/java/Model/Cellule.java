@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Cellule extends Poste {
 
-    public Cellule(int id) {
-        super(id);
+    public Cellule(int id, Poste suivant) {
+        super(id,suivant);
     }
 
     @Override
@@ -25,7 +25,6 @@ public class Cellule extends Poste {
 
     @Override
     public void suivant(ArrayList<Poste> suivants) {
-        setLot(null);
         
     }
     

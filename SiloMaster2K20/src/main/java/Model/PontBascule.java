@@ -13,8 +13,8 @@ import java.util.ArrayList;
  * @author PC
  */
 public class PontBascule extends Poste{
-    public PontBascule(int id) {
-        super(id);
+    public PontBascule(int id, Poste suivant) {
+        super(id,suivant);
     }
 
     @Override
