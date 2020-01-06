@@ -104,6 +104,14 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        panelFosses = new javax.swing.JPanel();
+        panelTremies = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        panelBoisseau = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -115,16 +123,42 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        panelFosses = new javax.swing.JPanel();
-        panelTremies = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        panelBoisseau = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SiloMaster2K20");
         setMinimumSize(new java.awt.Dimension(800, 800));
+
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setLayout(new java.awt.GridLayout(4, 1));
+
+        panelFosses.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
+        panelFosses.setLayout(new java.awt.GridLayout(1, 2));
+        jPanel2.add(panelFosses);
+
+        panelTremies.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
+        panelTremies.setLayout(new java.awt.GridLayout(1, 2));
+        jPanel2.add(panelTremies);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jButton1.setText("Silo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1, new java.awt.GridBagConstraints());
+
+        jPanel2.add(jPanel3);
+
+        panelBoisseau.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
+        panelBoisseau.setLayout(new java.awt.GridLayout(1, 3));
+        jPanel2.add(panelBoisseau);
+
+        jPanel6.add(jPanel2, java.awt.BorderLayout.CENTER);
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 1));
 
@@ -174,36 +208,12 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.WEST);
+        jPanel6.add(jPanel1, java.awt.BorderLayout.WEST);
 
-        jPanel2.setLayout(new java.awt.GridLayout(4, 1));
+        jTabbedPane1.addTab("tab1", jPanel6);
+        jTabbedPane1.addTab("tab2", jPanel7);
 
-        panelFosses.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
-        panelFosses.setLayout(new java.awt.GridLayout(1, 2));
-        jPanel2.add(panelFosses);
-
-        panelTremies.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
-        panelTremies.setLayout(new java.awt.GridLayout(1, 2));
-        jPanel2.add(panelTremies);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
-        jPanel3.setLayout(new java.awt.GridBagLayout());
-
-        jButton1.setText("Silo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton1, new java.awt.GridBagConstraints());
-
-        jPanel2.add(jPanel3);
-
-        panelBoisseau.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
-        panelBoisseau.setLayout(new java.awt.GridLayout(1, 3));
-        jPanel2.add(panelBoisseau);
-
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -270,6 +280,9 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel panelBoisseau;
     private javax.swing.JPanel panelFosses;
     private javax.swing.JPanel panelTremies;
