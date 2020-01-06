@@ -115,8 +115,6 @@ public class CelluleTest {
         cell_ok.suivant();
         
         // Traitement boisseau
-        assertEquals(lot.isTraitementTermine(),true);
-        assertEquals(c.isTraitementTermine(),true);
         
         assertEquals(cell_ok.isPlein(),false);
         assertEquals(cell_ok.getLot(),null);
