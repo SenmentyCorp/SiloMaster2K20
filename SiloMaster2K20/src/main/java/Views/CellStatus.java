@@ -74,6 +74,7 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
             cellNumber.setText("Cellule numéro " + cell.getId());
             cellVolume.setText(Cellule.poidsMax + "m^3");
             isFanOn = (cell.getVent().getPuissance() > 0);
+            this.setAlarm(cell.isPanne());
         } else {
             grainType.setText(" --- ");
             grainMeanTemperature.setText("-- °C");
@@ -379,7 +380,8 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void alarmbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alarmbuttonActionPerformed
-        // TODO add your handling code here:
+        this.cell.setPanne(false);
+        this.setAlarm(false);
     }//GEN-LAST:event_alarmbuttonActionPerformed
 
 
