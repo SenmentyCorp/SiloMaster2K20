@@ -7,6 +7,7 @@ package Engine;
 
 import Controllers.*;
 import Model.Boisseau;
+import Model.Capteur;
 import Model.Cellule;
 import Model.Commande;
 import Model.FosseReception;
