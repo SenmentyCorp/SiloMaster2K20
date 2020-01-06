@@ -21,8 +21,25 @@ public class CommandDialog extends javax.swing.JDialog {
         initComponents();
         jLabel1.setText("Commande "+c.getId());
         jFormattedTextField1.setText(c.getDescription());
-        jLabel4.setText(c.getDepart().toString());
-        jLabel5.setText(c.getArrivee().toString());
+        try{
+        jLabel5.setText(c.getDepart().toString());
+        }catch(Exception e){
+            jLabel5.setText("Non définie");
+        }
+        jLabel4.setText(c.getArrivee().toString());
+    }
+    
+        public CommandDialog(java.awt.Window parent, boolean modal,Commande c) {
+        super(parent, java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        initComponents();
+        jLabel1.setText("Commande "+c.getId());
+        jFormattedTextField1.setText(c.getDescription());
+        try{
+        jLabel5.setText(c.getDepart().toString());
+        }catch(Exception e){
+            jLabel5.setText("Non définie");
+        }
+        jLabel4.setText(c.getArrivee().toString());
     }
 
     /**
