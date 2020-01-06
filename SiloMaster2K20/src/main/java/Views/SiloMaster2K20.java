@@ -5,6 +5,7 @@
  */
 package Views;
 
+import Engine.GestionEvenement;
 import Model.*;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -15,13 +16,18 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -42,7 +48,7 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
     public SiloMaster2K20(ArrayList<Poste> l) {
         postes = l;
         initComponents();
-        
+        loadTree();
         
         for (Poste p : postes) {
             PosteStatus ps = new PosteStatus(p);
@@ -59,6 +65,25 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
         }
         autoResizeGithub();
         silo = new Silo();
+    }
+    
+    public void loadTree(){
+        
+        this.jTree1.removeAll();
+        
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+        
+        List<Commande> lstCommande = GestionEvenement.getInstance().getArchivage().getLstCommande().stream().filter(c -> c.isTraitementTermine()).collect(Collectors.toList());
+        
+        for(Commande c : lstCommande){
+            DefaultMutableTreeNode n1 = new DefaultMutableTreeNode(c.getId());
+            root.add(n1);
+        }
+        
+        DefaultTreeModel model = new DefaultTreeModel(root);
+        this.jTree1 = new JTree(model);
+        
+        add(this.jTree1);
     }
 
     public void autoResizeGithub() {
