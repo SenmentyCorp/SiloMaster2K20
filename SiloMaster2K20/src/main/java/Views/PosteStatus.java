@@ -12,6 +12,7 @@ import Model.Poste;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -19,7 +20,7 @@ import javax.swing.SwingUtilities;
  *
  * @author flavi
  */
-public class PosteStatus extends javax.swing.JPanel implements Observer{
+public class PosteStatus extends javax.swing.JPanel implements Observer {
 
     private Poste poste;
     private boolean capteur;
@@ -30,12 +31,12 @@ public class PosteStatus extends javax.swing.JPanel implements Observer{
     public PosteStatus(Poste p) {
         this.poste = p;
         initComponents();
-        
+
         jLabel1.setText(this.poste.getClass().getName().substring(6) + " ID:" + this.poste.getId());
         this.setAlarm(false);
-        
+
         p.addObserver(this);
-        
+
         this.updateInterface();
     }
 
@@ -170,7 +171,16 @@ public class PosteStatus extends javax.swing.JPanel implements Observer{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new CommandDialog((JFrame) SwingUtilities.getRoot(this), true, this.poste.getLot().getCommande()).setVisible(true);
+        try {
+            Commande ctemp = this.poste.getLot().getCommande();
+            try {
+                new CommandDialog((JFrame) SwingUtilities.getRoot(this), true, ctemp).setVisible(true);
+            } catch (Exception e) {
+                new CommandDialog((java.awt.Window) SwingUtilities.getRoot(this), true, ctemp).setVisible(true);
+            }
+        } catch (NullPointerException e) {
+            System.err.println("Poste vide.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -199,8 +209,8 @@ public class PosteStatus extends javax.swing.JPanel implements Observer{
     private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 
-    private void updateInterface(){
-        if(this.poste.getLot() != null){
+    private void updateInterface() {
+        if (this.poste.getLot() != null) {
             jLabel2.setText("Lot: " + poste.getLot().getId());
             Labelpoids.setText(Float.toString(poste.getLot().getPoids()));
             LabelQualite.setText(poste.getLot().getQualite());
@@ -210,10 +220,10 @@ public class PosteStatus extends javax.swing.JPanel implements Observer{
             jLabel2.setText("Lot: --- ");
             Labelpoids.setText(" --- ");
             LabelQualite.setText(" --- ");
-            LabelType.setText(" --- "); 
-        } 
+            LabelType.setText(" --- ");
+        }
     }
-    
+
     @Override
     public void update(Observable o, Object arg) {
         this.updateInterface();

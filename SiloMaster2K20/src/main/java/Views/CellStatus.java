@@ -17,6 +17,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -43,9 +44,9 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
      * @param c Cellule observée
      */
     public CellStatus(Cellule c) {
-        
+
         cell = c;
-        
+
         isFanOn = false;
         initComponents();
         try {
@@ -54,16 +55,16 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
         } catch (Exception e) {
 
         }
-        
+
         cell.addObserver(this);
-        
-        updateData();  
+
+        updateData();
     }
 
     @Override
     public void updateData() {
-        
-        if(cell.getLot() != null){
+
+        if (cell.getLot() != null) {
             Lot l = cell.getLot();
             grainType.setText(l.getTypeCereale());
             grainMeanTemperature.setText(String.format("%.2g%n", cell.getTemperature()) + "°C");
@@ -73,7 +74,7 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
             cellNumber.setText("Cellule numéro " + cell.getId());
             cellVolume.setText(Cellule.poidsMax + "m^3");
             isFanOn = (cell.getVent().getPuissance() > 0);
-        }else{
+        } else {
             grainType.setText(" --- ");
             grainMeanTemperature.setText("-- °C");
             grainHumidity.setText("-- %");
@@ -83,7 +84,7 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
             cellVolume.setText(Cellule.poidsMax + "m^3");
             isFanOn = (cell.getVent().getPuissance() > 0);
         }
-        
+
         autoResizeFan();
         updateFan();
         this.repaint();
@@ -337,8 +338,8 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
     }//GEN-LAST:event_fanImagePanelComponentResized
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(cell.getLot()!=null){
-            new LotInfo((JFrame) SwingUtilities.getWindowAncestor(this), true, cell.getLot().toString()).setVisible(true);            
+        if (cell.getLot() != null) {
+            new PosteStatusSolo(SwingUtilities.getWindowAncestor(this), true, new PosteStatus(cell)).setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -30,8 +30,6 @@ import javax.swing.SwingUtilities;
 public class SiloMaster2K20 extends javax.swing.JFrame {
 
     private ArrayList<Poste> postes;
-    private ArrayList<Tremie> tremies;
-    private ArrayList<Boisseau> boisseaux;
     private Silo silo;
 
     /**
@@ -40,7 +38,6 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
     public SiloMaster2K20(ArrayList<Poste> l) {
         postes = l;
         initComponents();
-        ImageIcon github;
         
         
         for (Poste p : postes) {
