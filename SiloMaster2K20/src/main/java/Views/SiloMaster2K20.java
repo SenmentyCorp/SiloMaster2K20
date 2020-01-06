@@ -41,14 +41,12 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
         postes = l;
         initComponents();
         ImageIcon github;
-        try {
-
-        } catch (Exception e) {
-        }
+        
+        
         for (Poste p : postes) {
             PosteStatus ps = new PosteStatus(p);
             switch (p.getClass().getSimpleName()) {
-                case "FosseRecuperation":
+                case "FosseReception":
                     panelFosses.add(ps);
                     break;
                 case "Tremie":
@@ -125,6 +123,7 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SiloMaster2K20");
+        setMinimumSize(new java.awt.Dimension(800, 800));
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 1));
 

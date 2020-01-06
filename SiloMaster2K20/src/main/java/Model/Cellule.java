@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Engine.GestionEvenement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -57,6 +58,9 @@ public class Cellule extends Poste {
             this.setLot(null);
             boAModifier.traitement();
         }  
+        setChanged();
+        notifyObservers();
+        GestionEvenement.getInstance().getArchivage().writeFileJSON();
     }
 
     public Ventilation getVent() {

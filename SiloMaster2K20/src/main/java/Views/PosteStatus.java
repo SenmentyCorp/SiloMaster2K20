@@ -10,6 +10,8 @@ import Model.Commande;
 import Model.Lot;
 import Model.Poste;
 import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -17,7 +19,7 @@ import javax.swing.SwingUtilities;
  *
  * @author flavi
  */
-public class PosteStatus extends javax.swing.JPanel {
+public class PosteStatus extends javax.swing.JPanel implements Observer{
 
     private Poste poste;
     private boolean capteur;
@@ -28,12 +30,13 @@ public class PosteStatus extends javax.swing.JPanel {
     public PosteStatus(Poste p) {
         this.poste = p;
         initComponents();
+        
         jLabel1.setText(this.poste.getClass().getName().substring(6) + " ID:" + this.poste.getId());
-        jLabel2.setText("Lot: " + poste.getLot().getId());
-        Labelpoids.setText(Float.toString(poste.getLot().getPoids()));
-        LabelQualite.setText(poste.getLot().getQualite());
-        LabelType.setText(poste.getLot().getTypeCereale());
         this.setAlarm(false);
+        
+        p.addObserver(this);
+        
+        this.updateInterface();
     }
 
     public void setAlarm(boolean b) {
@@ -184,4 +187,23 @@ public class PosteStatus extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
+
+    private void updateInterface(){
+        if(this.poste.getLot() != null){
+            jLabel2.setText("Lot: " + poste.getLot().getId());
+            Labelpoids.setText(Float.toString(poste.getLot().getPoids()));
+            LabelQualite.setText(poste.getLot().getQualite());
+            LabelType.setText(poste.getLot().getTypeCereale()); 
+        }else{
+            jLabel2.setText("Lot: --- ");
+            Labelpoids.setText(" --- ");
+            LabelQualite.setText(" --- ");
+            LabelType.setText(" --- "); 
+        } 
+    }
+    
+    @Override
+    public void update(Observable o, Object arg) {
+        this.updateInterface();
+    }
 }

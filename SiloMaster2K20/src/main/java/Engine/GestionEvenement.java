@@ -87,9 +87,11 @@ public final class GestionEvenement {
             String desc = "";
 
             Commande newCommande = this.commandeCtrl.creerCommande(id, arrivee, depart, desc); 
-            newCommande.setLot(this.creerLot(newCommande, fossesLibres.get(0)));
+            Lot newLot = (this.creerLot(newCommande, fossesLibres.get(0)));
 
             this.archivage.getLstCommande().add(newCommande);
+            this.archivage.getLstLot().add(newLot);
+            this.archivage.writeFileJSON();
         }   
     }
     
@@ -152,6 +154,8 @@ public final class GestionEvenement {
     
     public void creerPostes()
     {
+        this.archivage.readFileJSON();
+        
         ArrayList<Boisseau> boisseaux = new ArrayList<Boisseau>(); 
         boisseaux.add(new Boisseau(1));
         boisseaux.add(new Boisseau(2));
