@@ -212,7 +212,7 @@ public class PosteStatus extends javax.swing.JPanel implements Observer {
     private void updateInterface() {
         if (this.poste.getLot() != null) {
             jLabel2.setText("Lot: " + poste.getLot().getId());
-            Labelpoids.setText(Float.toString(poste.getLot().getPoids()));
+            Labelpoids.setText(String.format("%.5g%n", poste.getLot().getPoids()));
             LabelQualite.setText(poste.getLot().getQualite());
             LabelType.setText(poste.getLot().getTypeCereale()); 
             this.setAlarm(this.poste.isPanne());
