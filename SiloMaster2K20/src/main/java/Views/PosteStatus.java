@@ -77,6 +77,7 @@ public class PosteStatus extends javax.swing.JPanel implements Observer{
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         setMinimumSize(new java.awt.Dimension(430, 118));
         setPreferredSize(new java.awt.Dimension(430, 175));
         setLayout(new java.awt.BorderLayout());
