@@ -9,6 +9,7 @@ import Model.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -23,6 +24,7 @@ public class Clock implements Runnable {
     public void run(){       
        
         GestionEvenement.getInstance().creerPostes();
+        Random rand = new Random();
         
         while(true){
         
@@ -33,8 +35,24 @@ public class Clock implements Runnable {
                                         && poste.isPlein() == true
                                 ).collect(Collectors.toList());
             
-            Collections.shuffle(po);
-            po.get(0).suivant();
+            if(po.size() != 0){
+                Collections.shuffle(po);
+                po.get(0).suivant();
+            }
+            
+            if(rand.nextInt(100) < 5){
+                
+                po = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
+                                poste ->
+                                poste.isPanne() == false 
+                                && poste.isPlein() == true
+                        ).collect(Collectors.toList());
+                
+                if(po.size() != 0){
+                    Collections.shuffle(po);
+                    po.get(0).setPanne(true);
+                }
+            }
             
             try {
                 Thread.sleep(500);
