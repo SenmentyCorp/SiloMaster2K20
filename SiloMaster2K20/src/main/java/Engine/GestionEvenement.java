@@ -154,7 +154,7 @@ public final class GestionEvenement {
     
     public void creerPostes()
     {
-        //this.archivage.readFileJSON();
+        this.archivage.readFileJSON();
         
         ArrayList<Boisseau> boisseaux = new ArrayList<Boisseau>(); 
         boisseaux.add(new Boisseau(1));

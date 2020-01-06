@@ -12,7 +12,7 @@ import java.util.Date;
  * @author Alex-PC
  */
 public class Commande {
-    
+
     private int id;
     private Date arrivee;
     private Date depart;
@@ -20,13 +20,13 @@ public class Commande {
     private boolean traitementTermine;
 
     public boolean isTraitementTermine() {
+        this.depart = new Date();
         return traitementTermine;
     }
 
     public void setTraitementTermine(boolean estTraite) {
         this.traitementTermine = estTraite;
     }
-    
 
     public int getId() {
         return id;
@@ -46,7 +46,7 @@ public class Commande {
 
     /*
     Constructeur sans Lot en paramètre
-    */
+     */
     public Commande(int id, Date arrivee, Date depart, String description) {
         this.id = id;
         this.arrivee = arrivee;
@@ -54,19 +54,19 @@ public class Commande {
         this.description = description;
         this.traitementTermine = false;
     }
-    
+
     @Override
     public String toString() {
-        return " ID : " +this.id + "\n ARRIVEE: " + this.arrivee + "\n DEPART: " + this.depart + "\n DESCRIPTION: " + this.description; 
+        return " ID : " + this.id + "\n ARRIVEE: " + this.arrivee + "\n DEPART: " + this.depart + "\n DESCRIPTION: " + this.description;
     }
-    
+
     @Override
-    public boolean equals(Object o){
-        if(o.getClass() == Commande.class){
-            Commande test = (Commande)(o);
-            
-            return test.getId()==this.id;
-        }else{
+    public boolean equals(Object o) {
+        if (o.getClass() == Commande.class) {
+            Commande test = (Commande) (o);
+
+            return test.getId() == this.id;
+        } else {
             return false;
         }
     }

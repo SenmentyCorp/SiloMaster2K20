@@ -41,15 +41,14 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
     public Silo getSilo() {
         return silo;
     }
-    
+
     /**
      * Creates new form SiloMaster2K20
      */
     public SiloMaster2K20(ArrayList<Poste> l) {
         postes = l;
         initComponents();
-        loadTree();
-        
+
         for (Poste p : postes) {
             PosteStatus ps = new PosteStatus(p);
             switch (p.getClass().getSimpleName()) {
@@ -65,25 +64,33 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
         }
         autoResizeGithub();
         silo = new Silo();
+        loadTree();
+
     }
-    
-    public void loadTree(){
-        
+
+    public void loadTree() {
+
         this.jTree1.removeAll();
-        
+
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
-        
-        List<Commande> lstCommande = GestionEvenement.getInstance().getArchivage().getLstCommande().stream().filter(c -> c.isTraitementTermine()).collect(Collectors.toList());
-        
-        for(Commande c : lstCommande){
-            DefaultMutableTreeNode n1 = new DefaultMutableTreeNode(c.getId());
-            root.add(n1);
-        }
-        
         DefaultTreeModel model = new DefaultTreeModel(root);
-        this.jTree1 = new JTree(model);
-        
-        add(this.jTree1);
+        jTree1.setModel(model);
+        jTree1.setRootVisible(true);
+        jTree1.setShowsRootHandles(true);
+
+        List<Commande> lstCommande = GestionEvenement.getInstance().getArchivage().getLstCommande().stream().filter(c -> c.isTraitementTermine()).collect(Collectors.toList());
+        int i = 0;
+        for (Commande c : lstCommande) {
+            DefaultMutableTreeNode n1 = new DefaultMutableTreeNode(c.getId());
+            model.insertNodeInto(n1, root, i);
+            model.insertNodeInto(new DefaultMutableTreeNode("Arrivée: " + c.getArrivee().toString()), n1, 0);
+            model.insertNodeInto(new DefaultMutableTreeNode("Depart: " + c.getDepart().toString()), n1, 1);
+            model.insertNodeInto(new DefaultMutableTreeNode("Description: " + c.getDescription()), n1, 2);
+            i++;
+        }
+        model.reload(root);
+
+        //this.repaint();
     }
 
     public void autoResizeGithub() {
@@ -253,7 +260,7 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           new StatusSilo(silo).setVisible(true);
+        new StatusSilo(silo).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
