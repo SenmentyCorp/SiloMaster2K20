@@ -26,7 +26,7 @@ public class StatusSilo extends javax.swing.JFrame implements Simulable {
 
     @Override
     public void updateData() {
-        ACStatus acs = new ACStatus(silo.ac);
+        ACStatus acs = new ACStatus(silo.getAc());
         this.ACPanel.removeAll();
         this.ACPanel.add(acs);
         this.CellPanel.removeAll();

@@ -36,7 +36,6 @@ public class Main {
        s.setVisible(true);*/
        
        
-       SiloMaster2K20 slm = new SiloMaster2K20(GestionEvenement.getInstance().getArchivage().getLstPoste());
-       slm.setVisible(true);
+       
     }
 }

@@ -32,6 +32,10 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
     private ArrayList<Poste> postes;
     private Silo silo;
 
+    public Silo getSilo() {
+        return silo;
+    }
+    
     /**
      * Creates new form SiloMaster2K20
      */

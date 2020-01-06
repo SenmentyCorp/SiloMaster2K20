@@ -6,6 +6,7 @@
 package Engine;
 
 import Model.*;
+import Views.SiloMaster2K20;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +25,10 @@ public class Clock implements Runnable {
     public void run(){       
        
         GestionEvenement.getInstance().creerPostes();
+        
+        SiloMaster2K20 slm = new SiloMaster2K20(GestionEvenement.getInstance().getArchivage().getLstPoste());
+        slm.setVisible(true);
+       
         Random rand = new Random();
         
         while(true){
@@ -40,7 +45,7 @@ public class Clock implements Runnable {
                 po.get(0).suivant();
             }
             
-            if(rand.nextInt(100) < 5){
+            if(rand.nextInt(100) < 3){
                 
                 po = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
                                 poste ->
@@ -52,6 +57,10 @@ public class Clock implements Runnable {
                     Collections.shuffle(po);
                     po.get(0).setPanne(true);
                 }
+            }
+            if(rand.nextInt(100) < 15){
+               slm.getSilo().getAc().setHumiExt(rand.nextInt(100));
+               slm.getSilo().getAc().setTemperatureExt(rand.nextInt(40)-5);
             }
             
             try {

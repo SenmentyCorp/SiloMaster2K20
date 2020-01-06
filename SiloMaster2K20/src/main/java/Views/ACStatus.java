@@ -12,6 +12,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -19,7 +21,7 @@ import javax.swing.ImageIcon;
  *
  * @author Flavien
  */
-public class ACStatus extends javax.swing.JPanel implements Simulable {
+public class ACStatus extends javax.swing.JPanel implements Simulable, Observer {
 
     private AC ac;
 
@@ -38,6 +40,7 @@ public class ACStatus extends javax.swing.JPanel implements Simulable {
      */
     public ACStatus(AC ac) {
         this.ac = ac;
+        ac.addObserver(this);
         initComponents();
         try {
             Pathhot = getClass().getClassLoader().getResource("cold.png").getFile();
@@ -228,5 +231,10 @@ public class ACStatus extends javax.swing.JPanel implements Simulable {
     private javax.swing.JPanel statusPanel;
     private javax.swing.JPanel topPanel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        updateData();
+    }
 
 }

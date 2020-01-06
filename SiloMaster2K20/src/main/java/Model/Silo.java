@@ -23,8 +23,21 @@ public class Silo{
     public ArrayList<Cellule> getCellules() {
         return cellules;
     }
-    public AC ac;
-    public int volume;
+    
+    private AC ac;
+    private int volume;
+
+    public AC getAc() {
+        return ac;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
 
     public Silo() {
         List<Poste> postesCell = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
