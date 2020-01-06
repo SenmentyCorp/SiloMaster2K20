@@ -5,11 +5,13 @@
  */
 package Model;
 
+import java.util.Observable;
+
 /**
  *
  * @author Flavien
  */
-public class Ventilation {
+public class Ventilation extends Observable{
 
     private int puissance;
 
@@ -27,5 +29,7 @@ public class Ventilation {
 
     public void setPuissance(int p) {
         this.puissance = (p <= 100 && p >= 0) ? p : 0;
+        setChanged();
+        notifyObservers();
     }
 }

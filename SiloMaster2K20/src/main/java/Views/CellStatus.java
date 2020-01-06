@@ -57,6 +57,7 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
         }
         setAlarm(false);
         cell.addObserver(this);
+        cell.getVent().addObserver(this);
 
         updateData();
     }

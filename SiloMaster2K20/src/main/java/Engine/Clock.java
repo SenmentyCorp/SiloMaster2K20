@@ -63,8 +63,25 @@ public class Clock implements Runnable {
                slm.getSilo().getAc().setTemperatureExt(slm.getSilo().getAc().temperatureExt+rand.nextInt(12)-5);
             }
             
+            
+            List<Poste> cells = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
+                                poste ->
+                                poste instanceof Cellule
+                                && poste.isPlein() == true
+                        ).collect(Collectors.toList());
+            
+            for(Poste c : cells){
+                Cellule cell = (Cellule)c;
+                float x = Math.abs(15-cell.getTemperature());
+                cell.getVent().setPuissance((int)x*5);
+                cell.getLstCapteur().stream().filter(
+                                capt ->
+                                capt.getTypeMesure() == "Temperature"
+                ).forEach(capt -> capt.setValeur(capt.getValeur()*x));
+            }
+            
             try {
-                Thread.sleep(500);
+                Thread.sleep(1200);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Clock.class.getName()).log(Level.SEVERE, null, ex);
             }
