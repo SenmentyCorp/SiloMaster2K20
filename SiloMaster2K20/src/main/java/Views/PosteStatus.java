@@ -155,6 +155,11 @@ public class PosteStatus extends javax.swing.JPanel implements Observer{
 
         jButton1.setBackground(FrameBasique.OKColor);
         jButton1.setText("Résoudre");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton1, new java.awt.GridBagConstraints());
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.CENTER);
@@ -167,6 +172,11 @@ public class PosteStatus extends javax.swing.JPanel implements Observer{
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new CommandDialog((JFrame) SwingUtilities.getRoot(this), true, this.poste.getLot().getCommande()).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.poste.setPanne(false);
+        this.setAlarm(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -195,6 +205,7 @@ public class PosteStatus extends javax.swing.JPanel implements Observer{
             Labelpoids.setText(Float.toString(poste.getLot().getPoids()));
             LabelQualite.setText(poste.getLot().getQualite());
             LabelType.setText(poste.getLot().getTypeCereale()); 
+            this.setAlarm(this.poste.isPanne());
         }else{
             jLabel2.setText("Lot: --- ");
             Labelpoids.setText(" --- ");
