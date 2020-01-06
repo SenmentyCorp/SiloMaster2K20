@@ -58,9 +58,9 @@ public class Clock implements Runnable {
                     po.get(0).setPanne(true);
                 }
             }
-            if(rand.nextInt(100) < 15){
-               slm.getSilo().getAc().setHumiExt(rand.nextInt(100));
-               slm.getSilo().getAc().setTemperatureExt(rand.nextInt(40)-5);
+            if(rand.nextInt(100) < 35){
+               slm.getSilo().getAc().setHumiExt(slm.getSilo().getAc().humiExt+rand.nextInt(20)-10);
+               slm.getSilo().getAc().setTemperatureExt(slm.getSilo().getAc().temperatureExt+rand.nextInt(12)-5);
             }
             
             try {
