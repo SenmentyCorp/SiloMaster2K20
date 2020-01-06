@@ -79,6 +79,7 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
         jTree1.setShowsRootHandles(true);
 
         List<Lot> lstCommande = GestionEvenement.getInstance().getArchivage().getLstLot().stream().filter(c -> c.getCommande().isTraitementTermine()).collect(Collectors.toList());
+        
         int i = 0;
         for (Lot l : lstCommande) {
             Commande c = l.getCommande();
@@ -87,14 +88,13 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
             model.insertNodeInto(n1, root, i);
             model.insertNodeInto(new DefaultMutableTreeNode("Arrivée: " + c.getArrivee().toString()), n1, 0);
             model.insertNodeInto(new DefaultMutableTreeNode("Depart: " + c.getDepart().toString()), n1, 1);
-            model.insertNodeInto(new DefaultMutableTreeNode("Description: " + c.getDescription()), n1, 2);
 
             DefaultMutableTreeNode lo = new DefaultMutableTreeNode("Lot");
             model.insertNodeInto(new DefaultMutableTreeNode("Id: " + l.getId()), lo, 0);
             model.insertNodeInto(new DefaultMutableTreeNode("Type: " + l.getTypeCereale()), lo, 1);
             model.insertNodeInto(new DefaultMutableTreeNode("Poids: " + l.getPoids()), lo, 2);
             model.insertNodeInto(new DefaultMutableTreeNode("Qualité: " + l.getQualite()), lo, 3);
-            model.insertNodeInto(lo, n1, 3);
+            model.insertNodeInto(lo, n1, 2);
 
             i++;
         }

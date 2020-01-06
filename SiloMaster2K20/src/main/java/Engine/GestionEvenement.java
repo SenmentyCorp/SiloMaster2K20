@@ -145,7 +145,6 @@ public final class GestionEvenement {
         
         Lot newLot = this.lotCtrl.creerLot(id, typeCereale, qualite, c);
         
-        this.archivage.getLstLot().add(newLot);
         p.setLot(newLot);
         p.traitement();
         
