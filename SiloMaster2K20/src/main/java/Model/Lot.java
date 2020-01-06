@@ -18,7 +18,6 @@ public class Lot extends Observable{
     private float poids;
     private String qualite;
     private Commande commande;
-    private Poste poste;
     private boolean traitementTermine;
 
     public boolean isTraitementTermine() {
@@ -53,28 +52,6 @@ public class Lot extends Observable{
 
     public Commande getCommande() {
         return commande;
-    }
-
-    public Poste getPoste() {
-        return poste;
-    }
-
-    public void setPoste(Poste poste) {
-        this.poste = poste;
-        setChanged();
-        notifyObservers();
-    }
-    
-    /*
-    Constucteur avec Poste
-    */
-    public Lot(int id, String TypeCereale, String qualite, Commande commande, Poste poste) {
-        this.id = id;
-        this.TypeCereale = TypeCereale;
-        this.qualite = qualite;
-        this.commande = commande;
-        this.poste = poste;
-        this.traitementTermine = false;
     }
 
     /*

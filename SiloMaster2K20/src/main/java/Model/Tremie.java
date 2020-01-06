@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Engine.GestionEvenement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +29,9 @@ public class Tremie extends Poste {
     
     @Override
     public void traitement() {
-        this.getLot().setPoids((float)((getLot().getPoids())*0.95));   
+        this.getLot().setPoids((float)((getLot().getPoids())*0.95)); 
+        setChanged();
+        notifyObservers();  
     }  
 
     public void setSuivant(ArrayList<Cellule> _lstSuivant){
@@ -53,6 +56,9 @@ public class Tremie extends Poste {
             this.setLot(null);
             cellAModifier.traitement();
         }
+        setChanged();
+        notifyObservers();
+        GestionEvenement.getInstance().getArchivage().writeFileJSON();
     }
 
 }
