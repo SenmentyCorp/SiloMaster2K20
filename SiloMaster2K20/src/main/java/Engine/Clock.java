@@ -78,6 +78,33 @@ public class Clock implements Runnable {
                 float sign2 = (Math.random() < 0.5) ? 1 : -1;
                 temp2 += rand.nextFloat() * sign2 * AC.inertie;
                 slm.getSilo().getAc().setTemperatureExt(temp2);
+            }            
+            
+            
+            List<Poste> cells = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
+                                poste ->
+                                poste instanceof Cellule
+                                && poste.isPlein() == true
+                        ).collect(Collectors.toList());
+            
+            for(Poste c : cells){
+                Cellule cell = (Cellule)c;
+                float x = Math.abs(15-cell.getTemperature());
+                int pui = (int)x*5;
+                
+                cell.getVent().setPuissance(pui);
+                
+                List<Capteur> lCa = cell.getLstCapteur().stream().filter(
+                                capt ->
+                                capt.getTypeMesure() == "Temperature"
+                            ).collect(Collectors.toList());
+                
+                for(Capteur capt : lCa){
+                    float temp = capt.getValeur();
+                    temp = (float)(temp * x * 0.2);
+                    capt.setValeur(temp);
+                }
+                        
             }
 
             try {
