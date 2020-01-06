@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
@@ -23,6 +24,7 @@ import javax.swing.ImageIcon;
  */
 public class ACStatus extends javax.swing.JPanel implements Simulable, Observer {
 
+    public static final DecimalFormat strFormat = new DecimalFormat("#0.00");
     private AC ac;
 
     private String Pathhot;
@@ -53,10 +55,10 @@ public class ACStatus extends javax.swing.JPanel implements Simulable, Observer 
 
     @Override
     public void updateData() {
-        TempExtLabel.setText(Double.toString(ac.temperatureExt));
-        HumExtLabel.setText(Double.toString(ac.humiExt));
-        jLabel7.setText(Double.toString(ac.tempSortie));
-        jLabel9.setText(Double.toString(ac.humiSortie));
+        TempExtLabel.setText(strFormat.format(ac.temperatureExt));
+        HumExtLabel.setText(strFormat.format(ac.humiExt));
+        jLabel7.setText(strFormat.format(ac.tempSortie));
+        jLabel9.setText(strFormat.format(ac.humiSortie));
         isACCold = (ac.temperatureExt > ac.tempSortie);
         autoResizeAC();
     }
