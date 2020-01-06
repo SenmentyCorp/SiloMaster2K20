@@ -72,20 +72,30 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
 
         this.jTree1.removeAll();
 
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Commandes terminées");
         DefaultTreeModel model = new DefaultTreeModel(root);
         jTree1.setModel(model);
         jTree1.setRootVisible(true);
         jTree1.setShowsRootHandles(true);
 
-        List<Commande> lstCommande = GestionEvenement.getInstance().getArchivage().getLstCommande().stream().filter(c -> c.isTraitementTermine()).collect(Collectors.toList());
+        List<Lot> lstCommande = GestionEvenement.getInstance().getArchivage().getLstLot().stream().filter(c -> c.getCommande().isTraitementTermine()).collect(Collectors.toList());
         int i = 0;
-        for (Commande c : lstCommande) {
+        for (Lot l : lstCommande) {
+            Commande c = l.getCommande();
+
             DefaultMutableTreeNode n1 = new DefaultMutableTreeNode(c.getId());
             model.insertNodeInto(n1, root, i);
             model.insertNodeInto(new DefaultMutableTreeNode("Arrivée: " + c.getArrivee().toString()), n1, 0);
             model.insertNodeInto(new DefaultMutableTreeNode("Depart: " + c.getDepart().toString()), n1, 1);
             model.insertNodeInto(new DefaultMutableTreeNode("Description: " + c.getDescription()), n1, 2);
+
+            DefaultMutableTreeNode lo = new DefaultMutableTreeNode("Lot");
+            model.insertNodeInto(new DefaultMutableTreeNode("Id: " + l.getId()), lo, 0);
+            model.insertNodeInto(new DefaultMutableTreeNode("Type: " + l.getTypeCereale()), lo, 1);
+            model.insertNodeInto(new DefaultMutableTreeNode("Poids: " + l.getPoids()), lo, 2);
+            model.insertNodeInto(new DefaultMutableTreeNode("Qualité: " + l.getQualite()), lo, 3);
+            model.insertNodeInto(lo, n1, 3);
+
             i++;
         }
         model.reload(root);
@@ -156,6 +166,8 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
 
@@ -248,6 +260,18 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
 
         jPanel7.setLayout(new java.awt.BorderLayout());
 
+        jPanel8.setLayout(new java.awt.BorderLayout());
+
+        jButton3.setText("Refresh");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel8.add(jButton3, java.awt.BorderLayout.WEST);
+
+        jPanel7.add(jPanel8, java.awt.BorderLayout.PAGE_START);
+
         jScrollPane1.setViewportView(jTree1);
 
         jPanel7.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -270,6 +294,10 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.loadTree();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +337,7 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -323,6 +352,7 @@ public class SiloMaster2K20 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTree jTree1;
