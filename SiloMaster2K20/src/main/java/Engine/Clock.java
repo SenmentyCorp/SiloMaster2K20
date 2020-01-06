@@ -30,24 +30,11 @@ public class Clock implements Runnable {
         slm.setVisible(true);
 
         Random rand = new Random();
-
+        int buffer = 0;
         while (true) {
-
-            GestionEvenement.getInstance().creerCommande();
-            List<Poste> po = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
-                    poste
-                    -> poste.isPanne() == false
-                    && poste.isPlein() == true
-            ).collect(Collectors.toList());
-
-            if (po.size() != 0) {
-                Collections.shuffle(po);
-                po.get(0).suivant();
-            }
-
-            if (rand.nextInt(100) < 3) {
-
-                po = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
+            if (buffer == 0) {
+                GestionEvenement.getInstance().creerCommande();
+                List<Poste> po = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
                         poste
                         -> poste.isPanne() == false
                         && poste.isPlein() == true
@@ -55,9 +42,24 @@ public class Clock implements Runnable {
 
                 if (po.size() != 0) {
                     Collections.shuffle(po);
-                    po.get(0).setPanne(true);
+                    po.get(0).suivant();
+                }
+
+                if (rand.nextInt(100) < 3) {
+
+                    po = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
+                            poste
+                            -> poste.isPanne() == false
+                            && poste.isPlein() == true
+                    ).collect(Collectors.toList());
+
+                    if (po.size() != 0) {
+                        Collections.shuffle(po);
+                        po.get(0).setPanne(true);
+                    }
                 }
             }
+            buffer = (buffer <= 6) ? buffer + 1 : 0;
             if (rand.nextInt(100) < 30) {
                 float temp = slm.getSilo().getAc().humiExt;
                 float sign = (Math.random() < 1) ? 1 : -1;
@@ -88,7 +90,7 @@ public class Clock implements Runnable {
 
             for (Poste c : cells) {
                 Cellule cell = (Cellule) c;
-                float x = Math.abs(15 - cell.getTemperature());
+                float x = Math.max(Math.abs(15 - cell.getTemperature()), Math.abs(15 - cell.getHumidite()));
                 int pui = (int) x * 5;
 
                 cell.getVent().setPuissance(pui);
@@ -97,10 +99,26 @@ public class Clock implements Runnable {
                         capt
                         -> capt.getTypeMesure() == "Temperature"
                 ).collect(Collectors.toList());
+                List<Capteur> lCah = cell.getLstCapteur().stream().filter(
+                        capt
+                        -> capt.getTypeMesure() == "Humidite"
+                ).collect(Collectors.toList());
 
+                x = Math.abs(cell.getTemperature() - 15);
                 for (Capteur capt : lCa) {
                     float temp = capt.getValeur();
-                    temp = (float) (temp * x * 0.2);
+                    int sign = (cell.getTemperature() < 15) ? 1 : -1;
+                    float ad = (float) (0.6 * sign * (x / 15.0));
+                    temp += ad;
+                    capt.setValeur(temp);
+                }
+
+                x = Math.abs(cell.getHumidite() - 15);
+                for (Capteur capt : lCah) {
+                    float temp = capt.getValeur();
+                    int sign = (cell.getHumidite() < 15) ? 1 : -1;
+                    float ad = (float) (0.6 * sign * (x / 15.0));
+                    temp += ad;
                     capt.setValeur(temp);
                 }
 

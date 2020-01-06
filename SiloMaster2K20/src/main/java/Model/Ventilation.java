@@ -20,7 +20,7 @@ public class Ventilation extends Observable{
     }
 
     public Ventilation() {
-        this.puissance = (int) (Math.random() * 3);
+        this.puissance = 0;
     }
 
     public Ventilation(int puissance) {

@@ -16,18 +16,18 @@ import java.util.stream.Collectors;
  * @author Lea
  */
 public class Cellule extends Poste {
-    
+
     private ArrayList<Boisseau> lstSuivant = new ArrayList<Boisseau>();
     public static final int poidsMax = 500;
     private Ventilation vent;
 
     public Cellule(int id, Poste suivant) {
-        super(id,suivant);
+        super(id, suivant);
     }
-    
+
     public Cellule(int id) {
         super(id);
-        this.vent=new Ventilation();
+        this.vent = new Ventilation();
     }
 
     @Override
@@ -35,29 +35,30 @@ public class Cellule extends Poste {
         setChanged();
         notifyObservers();
     }
-    
-    public void setSuivant(ArrayList<Boisseau> _lstSuivant){
+
+    public void setSuivant(ArrayList<Boisseau> _lstSuivant) {
         this.lstSuivant = _lstSuivant;
     }
 
     @Override
     public void suivant() {
         List<Boisseau> boDispo = this.lstSuivant.stream()
-                .filter(boisseau -> 
-                    !boisseau.isPanne() && 
-                    !boisseau.isPlein())
+                .filter(boisseau
+                        -> !boisseau.isPanne()
+                && !boisseau.isPlein())
                 .collect(Collectors.toList());
-        
-        if(boDispo.size() != 0){
+
+        if (boDispo.size() != 0) {
             Boisseau boAModifier = boDispo.get(0);
-            
+
             boAModifier.setLot(this.getLot());
             boAModifier.setPlein(true);
-            
+
             this.setPlein(false);
             this.setLot(null);
+            this.getVent().setPuissance(0);
             boAModifier.traitement();
-        }  
+        }
         setChanged();
         notifyObservers();
         GestionEvenement.getInstance().getArchivage().writeFileJSON();

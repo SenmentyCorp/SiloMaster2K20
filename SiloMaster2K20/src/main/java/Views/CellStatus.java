@@ -68,7 +68,7 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
         if (cell.getLot() != null) {
             Lot l = cell.getLot();
             grainType.setText(l.getTypeCereale());
-            grainMeanTemperature.setText(String.format("%.2g%n", cell.getTemperature()) + "°C");
+            grainMeanTemperature.setText(String.format("%.3g%n", cell.getTemperature()) + "°C");
             grainHumidity.setText(String.format("%.3g%n", cell.getHumidite()) + "%");
             cellCurrentVolumeBar.setValue((int) (l.getPoids() / cell.poidsMax * 100));
             fanSpeed.setValue(cell.getVent().getPuissance());
