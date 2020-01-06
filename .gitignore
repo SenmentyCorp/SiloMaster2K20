@@ -23,3 +23,5 @@
 hs_err_pid*
 /SiloMaster2K20/target/
 /LUCFFE/target/
+
+*.json
