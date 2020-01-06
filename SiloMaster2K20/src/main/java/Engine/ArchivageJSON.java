@@ -57,24 +57,33 @@ public class ArchivageJSON {
 
         //Lecture lots
         try{
-            BufferedReader bfRd = new BufferedReader(new FileReader("lots.json"));
-            this.lstLot = gson.fromJson(bfRd, new TypeToken<ArrayList<Lot>>(){}.getType());
+            File fLot = new File("lots.json");
+            if(fLot.exists()){
+                BufferedReader bfRd = new BufferedReader(new FileReader("lots.json"));
+                this.lstLot = gson.fromJson(bfRd, new TypeToken<ArrayList<Lot>>(){}.getType());   
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         //Lecture postes
         /*try{
-            BufferedReader bfRd = new BufferedReader(new FileReader("postes.json"));
-            this.lstPoste = gson.fromJson(bfRd, ArrayList.class);
+            File fLot = new File("postes.json");
+            if(fLot.exists()){
+                BufferedReader bfRd = new BufferedReader(new FileReader("postes.json"));
+                this.lstPoste = gson.fromJson(bfRd, ArrayList.class);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }*/
 
         //Lecture commandes
         try{
-            BufferedReader bfRd = new BufferedReader(new FileReader("commandes.json"));
-            this.lstCommande = gson.fromJson(bfRd, new TypeToken<ArrayList<Commande>>(){}.getType());
+            File fLot = new File("commandes.json");
+            if(fLot.exists()){
+                BufferedReader bfRd = new BufferedReader(new FileReader("commandes.json"));
+                this.lstCommande = gson.fromJson(bfRd, new TypeToken<ArrayList<Commande>>(){}.getType());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
