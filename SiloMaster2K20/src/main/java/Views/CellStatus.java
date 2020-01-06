@@ -55,7 +55,7 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
         } catch (Exception e) {
 
         }
-
+        setAlarm(false);
         cell.addObserver(this);
 
         updateData();
@@ -141,6 +141,16 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
 
     }
 
+    public void setAlarm(boolean b) {
+        if (!b) {
+            alarmbutton.setBackground(FrameBasique.OKColor);
+            alarmbutton.setText("");
+        } else {
+            alarmbutton.setBackground(FrameBasique.ErrorColor);
+            alarmbutton.setText("Résoudre");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -171,7 +181,10 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
         grainHumidity = new javax.swing.JLabel();
         volumeLabel = new javax.swing.JLabel();
         cellVolume = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        alarmbutton = new javax.swing.JButton();
 
         setBackground(FrameBasique.BackgroundColor);
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -317,6 +330,9 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
 
         jPanel3.add(statusPanel, java.awt.BorderLayout.CENTER);
 
+        jPanel4.setBackground(FrameBasique.BackgroundColor);
+        jPanel4.setLayout(new java.awt.GridLayout(2, 1));
+
         jButton1.setText("Infos Lot");
         jButton1.setMaximumSize(new java.awt.Dimension(135, 23));
         jButton1.setMinimumSize(new java.awt.Dimension(10, 23));
@@ -326,7 +342,26 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, java.awt.BorderLayout.PAGE_END);
+        jPanel4.add(jButton1);
+
+        jPanel5.setBackground(FrameBasique.BackgroundColor);
+        jPanel5.setAlignmentX(0.0F);
+        jPanel5.setAlignmentY(0.0F);
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        alarmbutton.setText("Résoudre");
+        alarmbutton.setAlignmentY(0.0F);
+        alarmbutton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        alarmbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alarmbuttonActionPerformed(evt);
+            }
+        });
+        jPanel5.add(alarmbutton, new java.awt.GridBagConstraints());
+
+        jPanel4.add(jPanel5);
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.SOUTH);
 
         jPanel1.add(jPanel3);
 
@@ -343,9 +378,14 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void alarmbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alarmbuttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_alarmbuttonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel acPanel;
+    private javax.swing.JButton alarmbutton;
     private javax.swing.JProgressBar cellCurrentVolumeBar;
     private javax.swing.JLabel cellNumber;
     private javax.swing.JLabel cellVolume;
@@ -362,6 +402,8 @@ public class CellStatus extends javax.swing.JPanel implements Simulable, Observe
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel statusPanel;
     private javax.swing.JLabel temperatureLabel;
     private javax.swing.JPanel topPanel;
