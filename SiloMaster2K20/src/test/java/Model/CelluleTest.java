@@ -87,7 +87,7 @@ public class CelluleTest {
 
     @Test
     public void testSuivant_vide() {
-        // Traitement quand suivant vide, cellule ne se vide pas
+        // Quand suivant vide, cellule ne se vide pas
         cell_vide.suivant();
         assertEquals(cell_vide.isPlein(),true);
         assertEquals(cell_vide.getLot(),lot);
@@ -95,7 +95,7 @@ public class CelluleTest {
     
     @Test
     public void testSuivant_panne() {
-        // Traitement quand suivants en panne, cellule ne se vide pas
+        // Quand suivants en panne, cellule ne se vide pas
         cell_panne.suivant();
         assertEquals(cell_panne.isPlein(),true);
         assertEquals(cell_panne.getLot(),lot);
@@ -103,7 +103,7 @@ public class CelluleTest {
     
     @Test
     public void testSuivant_plein() {
-        // Traitement quand suivants pleins, cellule ne se vide pas
+        // Quand suivants pleins, cellule ne se vide pas
         cell_plein.suivant();
         assertEquals(cell_plein.isPlein(),true);
         assertEquals(cell_plein.getLot(),lot);
@@ -111,11 +111,12 @@ public class CelluleTest {
     
     @Test
     public void testSuivant_ok() {
-        // Traitement quand suivant dispo, cellule se vide, boisseau est traite
+        // Quand suivant dispo, cellule se vide, boisseau est traite
         cell_ok.suivant();
         
         // Traitement boisseau
-        
+        assertEquals(bo_ok.getLot(),lot);
+        assertEquals(bo_ok.isPlein(),true);        
         assertEquals(cell_ok.isPlein(),false);
         assertEquals(cell_ok.getLot(),null);
     }
