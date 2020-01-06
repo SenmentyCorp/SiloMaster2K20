@@ -42,5 +42,14 @@ public class BoisseauTest {
     }
 
     
+    @Test
+    public void testSuivant() {
+        // Traitement termine pour lot et commande, lot deplace
+        boisseau.suivant();
+        assertEquals(l.isTraitementTermine(),true);
+        assertEquals(c.isTraitementTermine(),true);
+        assertEquals(boisseau.getLot(),null);
+        assertEquals(boisseau.isPlein(),false);
+    }
     
 }
