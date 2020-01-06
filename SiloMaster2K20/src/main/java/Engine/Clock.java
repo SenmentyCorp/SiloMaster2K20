@@ -7,6 +7,7 @@ package Engine;
 
 import Model.*;
 import Views.SiloMaster2K20;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,60 +16,66 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-
 /**
  *
  * @author PC
  */
 public class Clock implements Runnable {
-    
-    public void run(){       
-       
+
+    public void run() {
+
         GestionEvenement.getInstance().creerPostes();
-        
+
         SiloMaster2K20 slm = new SiloMaster2K20(GestionEvenement.getInstance().getArchivage().getLstPoste());
         slm.setVisible(true);
-       
+
         Random rand = new Random();
-        
-        while(true){
-        
+
+        while (true) {
+
             GestionEvenement.getInstance().creerCommande();
             List<Poste> po = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
-                                        poste ->
-                                        poste.isPanne() == false 
-                                        && poste.isPlein() == true
-                                ).collect(Collectors.toList());
-            
-            if(po.size() != 0){
+                    poste
+                    -> poste.isPanne() == false
+                    && poste.isPlein() == true
+            ).collect(Collectors.toList());
+
+            if (po.size() != 0) {
                 Collections.shuffle(po);
                 po.get(0).suivant();
             }
-            
-            if(rand.nextInt(100) < 3){
-                
+
+            if (rand.nextInt(100) < 3) {
+
                 po = GestionEvenement.getInstance().getArchivage().getLstPoste().stream().filter(
-                                poste ->
-                                poste.isPanne() == false 
-                                && poste.isPlein() == true
-                        ).collect(Collectors.toList());
-                
-                if(po.size() != 0){
+                        poste
+                        -> poste.isPanne() == false
+                        && poste.isPlein() == true
+                ).collect(Collectors.toList());
+
+                if (po.size() != 0) {
                     Collections.shuffle(po);
                     po.get(0).setPanne(true);
                 }
             }
-            if(rand.nextInt(100) < 35){
-               slm.getSilo().getAc().setHumiExt(slm.getSilo().getAc().humiExt+rand.nextInt(20)-10);
-               slm.getSilo().getAc().setTemperatureExt(slm.getSilo().getAc().temperatureExt+rand.nextInt(12)-5);
+            if (rand.nextInt(100) < 35) {
+                float temp = slm.getSilo().getAc().humiExt;
+                float sign = (Math.random() < 1) ? 1 : -1;
+                temp += rand.nextFloat() * sign * AC.inertie;
+                slm.getSilo().getAc().setHumiExt(temp);
+
+                float temp2 = slm.getSilo().getAc().temperatureExt;
+                float sign2 = (Math.random() < 0.5) ? 1 : -1;
+                temp2 += rand.nextFloat() * sign2 * AC.inertie;
+                slm.getSilo().getAc().setTemperatureExt(temp2);
             }
-            
+
             try {
                 Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Clock.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
 }

@@ -11,8 +11,9 @@ import java.util.Observable;
  *
  * @author Flavien
  */
-public class AC extends Observable{
+public class AC extends Observable {
 
+    public static final double inertie = 0.4;
     public float temperatureExt, tempSortie, humiExt, humiSortie;
 
     public float getTemperatureExt() {
@@ -34,9 +35,9 @@ public class AC extends Observable{
         notifyObservers();
         this.humiExt = humiExt;
     }
-    
+
     public AC() {
-        temperatureExt = 0;
+        temperatureExt = 15;
         tempSortie = 15;
         humiExt = 50;
         humiSortie = 15;
