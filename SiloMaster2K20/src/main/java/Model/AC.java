@@ -5,11 +5,12 @@
  */
 package Model;
 
+
 /**
  *
  * @author Flavien
  */
-public class AC {
+public class AC{
 
     public float temperatureExt, tempSortie, humiExt, humiSortie;
 

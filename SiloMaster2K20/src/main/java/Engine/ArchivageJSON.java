@@ -12,9 +12,12 @@ import java.time.Instant;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Collections;
 
 import java.util.Date;
 
@@ -53,7 +56,7 @@ public class ArchivageJSON {
 
         this.lstCommande.clear();
         this.lstLot.clear();
-        //this.lstPoste.clear();
+        this.lstPoste.clear();
 
         //Lecture lots
         try{
@@ -65,18 +68,21 @@ public class ArchivageJSON {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        
+        /*          --- Non fonctionnel ---
+        ArrayList<Cellule> lTemp = new ArrayList<Cellule>();
         //Lecture postes
-        /*try{
+        try{
             File fLot = new File("postes.json");
             if(fLot.exists()){
                 BufferedReader bfRd = new BufferedReader(new FileReader("postes.json"));
-                this.lstPoste = gson.fromJson(bfRd, ArrayList.class);
+                this.lstPoste = gson.fromJson(bfRd, new TypeToken<ArrayList<Poste>>(){}.getType()); 
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-
+        }
+        */
+        
         //Lecture commandes
         try{
             File fLot = new File("commandes.json");
@@ -93,9 +99,19 @@ public class ArchivageJSON {
 
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
-
+        
+        
+        ArrayList<Poste> alPoste = (ArrayList<Poste>) this.lstPoste.clone();
+        Collections.copy(alPoste, this.lstPoste);
+        
+        for(Poste p : alPoste){
+            p.deleteObservers();
+        }
+        
+        String postes = gson.toJson(alPoste);
+        
+        
         String lots = gson.toJson(this.lstLot);
-        //String postes = gson.toJson(this.lstPoste);
         String commandes = gson.toJson(this.lstCommande);
 
         //Ecriture des lots
@@ -116,7 +132,7 @@ public class ArchivageJSON {
         }
 
         //Ecriture des postes
-        /*try {
+        try {
             File file = new File("postes.json");
 
             // créer le fichier s'il n'existe pas
@@ -130,7 +146,7 @@ public class ArchivageJSON {
             bw.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
 
         //Ecriture des commandes

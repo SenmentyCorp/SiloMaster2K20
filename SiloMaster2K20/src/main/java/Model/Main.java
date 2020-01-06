@@ -20,23 +20,10 @@ public class Main {
         
         Clock cl = new Clock();
         new Thread(cl).start();
-        
-       /* GestionEvenement.getInstance().creerCommande();   
-        
-        System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).toString());
-        System.out.println(GestionEvenement.getInstance().getArchivage().getLstCommande().get(0).getLot().toString());
-
-        ArchivageJSON arch = new ArchivageJSON();
-        arch.writeFileJSON();
-        arch.readFileJSON();
-
-        System.out.println(arch.getLstCommande().toString());
-       
-       StatusSilo s=new StatusSilo(new Silo());
-       s.setVisible(true);*/
-       
        
        SiloMaster2K20 slm = new SiloMaster2K20(GestionEvenement.getInstance().getArchivage().getLstPoste());
        slm.setVisible(true);
     }
 }
+
+
